@@ -14,6 +14,12 @@ return Scaffold(
         color: Colors.brown[50],
       ) 
       ),
+     Container(
+        alignment: Alignment.bottomCenter,
+        width: 100,
+        height: 200,
+         )
+      
     ],
 ),
 ); 
