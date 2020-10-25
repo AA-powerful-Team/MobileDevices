@@ -104,6 +104,7 @@ class LowerSegmentBGB extends StatelessWidget {
                   Expanded(
                     flex: 20,
                     child: Container(
+                      padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
@@ -111,14 +112,64 @@ class LowerSegmentBGB extends StatelessWidget {
                           topRight: Radius.circular(25),
                         ),
                       ),
+                      child: Column(
+                        children: [
+                          Expanded(
+                              flex: 2,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Task name', //HARDCODED
+                                    style: TextStyle(
+                                      fontFamily: '',
+                                      fontSize: 25, //HARDCODED
+                                    ),
+                                  ),
+                                  SizedBox(width: 150), //HARDCODED
+                                  Spacer(),
+                                  Text(
+                                    'priority',
+                                    style: TextStyle(
+                                        fontFamily: '',
+                                        fontSize: 15), //HARDCODED
+                                  ),
+                                ],
+                              )),
+                               SizedBox(height: 15,),
+                          Expanded(
+                            flex: 4,
+                            child: Align(alignment: Alignment.topLeft ,child: Text(
+                                'lorem ipsume fhjkasfjhnajhfjshnjcnasndjncansjncnajsndj',
+                                style: TextStyle(
+                                  fontFamily: '',
+                                  fontSize: 15,
+                                ),
+                               
+                                ),
+                                )
+                              
+                          ),
+                          Divider(height: 20),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              child: Row(
+                                children: [
+                                  Icon(Icons.timelapse),
+                                  SizedBox(width:20),
+                                  Text('xx/xx/xxxx'),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],
               ),
             ),
-            
-            SizedBox(height:15),
-
+            SizedBox(height: 15),
             Expanded(
                 flex: 1, // icons bar
                 child: Row(
@@ -139,7 +190,7 @@ class LowerSegmentBGB extends StatelessWidget {
                       color: Colors.grey,
                       size: 50,
                     ),
-                     Icon(
+                    Icon(
                       Icons.home,
                       color: Colors.grey,
                       size: 50,
