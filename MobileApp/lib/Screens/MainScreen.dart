@@ -30,7 +30,7 @@ class BaseBackground extends StatelessWidget {
             child: UpperSegmentBGB(), //invisible Rect
           ),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: LowerSegmentBGB(),
           ),
         ],
@@ -56,13 +56,15 @@ class LowerSegmentBGB extends StatelessWidget {
         ),
       ),
 
-      child: Container( //Inside the the lower part segmentBGB
-  
+      child: Container(
+        //Inside the the lower part segmentBGB
+
         padding: EdgeInsets.all(40), //HARDCODED
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row( //Text row
+            Row(
+              //Text row type of task
               children: [
                 Text(
                   'Recently Assigned', //HARDCODED
@@ -71,12 +73,29 @@ class LowerSegmentBGB extends StatelessWidget {
                     fontSize: 25, //HARDCODED
                   ),
                 ),
-                SizedBox(width: 150),//HARDCODED
+                SizedBox(width: 150), //HARDCODED
+                Spacer(),
                 Text(
                   'All tasks',
-                  style: TextStyle(fontFamily: '', fontSize: 15),//HARDCODED
-                ), 
+                  style: TextStyle(fontFamily: '', fontSize: 15), //HARDCODED
+                ),
               ],
+            ),
+            Container(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      color: Colors.orange[600],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: Container(),
+                  )
+                ],
+              ),
             ),
           ],
         ),
