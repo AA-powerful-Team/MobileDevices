@@ -59,29 +59,33 @@ class LowerSegmentBGB extends StatelessWidget {
       child: Container(
         //Inside the the lower part segmentBGB
 
-        padding: EdgeInsets.all(40), //HARDCODED
+        padding: EdgeInsets.all(40), //HARDCODED\
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              //Text row type of task
-              children: [
-                Text(
-                  'Recently Assigned', //HARDCODED
-                  style: TextStyle(
-                    fontFamily: '',
-                    fontSize: 25, //HARDCODED
+            Expanded(
+              flex: 1,
+              child: Row(
+                //Text row type of task
+                children: [
+                  Text(
+                    'Recently Assigned', //HARDCODED
+                    style: TextStyle(
+                      fontFamily: '',
+                      fontSize: 25, //HARDCODED
+                    ),
                   ),
-                ),
-                SizedBox(width: 150), //HARDCODED
-                Spacer(),
-                Text(
-                  'All tasks',
-                  style: TextStyle(fontFamily: '', fontSize: 15), //HARDCODED
-                ),
-              ],
+                  SizedBox(width: 150), //HARDCODED
+                  Spacer(),
+                  Text(
+                    'All tasks',
+                    style: TextStyle(fontFamily: '', fontSize: 15), //HARDCODED
+                  ),
+                ],
+              ),
             ),
-            Container(
+            Expanded(
+              flex: 2,
               child: Row(
                 children: [
                   Expanded(
