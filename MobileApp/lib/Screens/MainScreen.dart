@@ -59,12 +59,13 @@ class LowerSegmentBGB extends StatelessWidget {
       child: Container(
         //Inside the the lower part segmentBGB
 
-        padding: EdgeInsets.all(40), //HARDCODED\
+        padding: EdgeInsets.only(
+            left: 40, bottom: 10, right: 40, top: 5), //HARDCODED\
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Row(
                 //Text row type of task
                 children: [
@@ -85,22 +86,66 @@ class LowerSegmentBGB extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 4, //middlebox
               child: Row(
                 children: [
                   Expanded(
                     flex: 1,
                     child: Container(
-                      color: Colors.orange[600],
+                      decoration: BoxDecoration(
+                        color: Colors.orange[600],
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(25),
+                          topLeft: Radius.circular(25),
+                        ),
+                      ),
                     ),
                   ),
                   Expanded(
-                    flex: 4,
-                    child: Container(),
+                    flex: 20,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(25),
+                          topRight: Radius.circular(25),
+                        ),
+                      ),
+                    ),
                   )
                 ],
               ),
             ),
+            
+            SizedBox(height:15),
+
+            Expanded(
+                flex: 1, // icons bar
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      Icons.home,
+                      color: Colors.grey,
+                      size: 50,
+                    ),
+                    Icon(
+                      Icons.home,
+                      color: Colors.grey,
+                      size: 50,
+                    ),
+                    Icon(
+                      Icons.home,
+                      color: Colors.grey,
+                      size: 50,
+                    ),
+                     Icon(
+                      Icons.home,
+                      color: Colors.grey,
+                      size: 50,
+                    ),
+                  ],
+                ))
           ],
         ),
       ),
