@@ -84,7 +84,6 @@ class LowerSegmentBGB extends StatelessWidget {
 }
 
 class Appbar extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -116,7 +115,6 @@ class Appbar extends StatelessWidget {
 }
 
 class TaskInformation extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -162,25 +160,25 @@ class TaskInformation extends StatelessWidget {
                         Text(
                           'priority',
                           style: TextStyle(
-                              fontFamily: '',
-                              fontSize: 15), //HARDCODED
+                              fontFamily: '', fontSize: 15), //HARDCODED
                         ),
                       ],
                     )),
-                     SizedBox(height: 15,),
-                Expanded(
-                  flex: 4,
-                  child: Align(alignment: Alignment.topLeft ,child: Text(
-                      'lorem ipsume fhjkasfjhnajhfjshnjcnasndjncansjncnajsndj',
-                      style: TextStyle(
-                        fontFamily: '',
-                        fontSize: 15,
-                      ),
-                     
-                      ),
-                      )
-                    
+                SizedBox(
+                  height: 15,
                 ),
+                Expanded(
+                    flex: 4,
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'lorem ipsume fhjkasfjhnajhfjshnjcnasndjncansjncnajsndj',
+                        style: TextStyle(
+                          fontFamily: '',
+                          fontSize: 15,
+                        ),
+                      ),
+                    )),
                 Divider(height: 20),
                 Expanded(
                   flex: 1,
@@ -188,7 +186,7 @@ class TaskInformation extends StatelessWidget {
                     child: Row(
                       children: [
                         Icon(Icons.timelapse),
-                        SizedBox(width:20),
+                        SizedBox(width: 20),
                         Text('xx/xx/xxxx'),
                       ],
                     ),
@@ -204,7 +202,6 @@ class TaskInformation extends StatelessWidget {
 }
 
 class LowerSegmentTitle extends StatelessWidget {
- 
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -233,6 +230,50 @@ class UpperSegmentBGB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        UserInfo(),
+        
+      ],
+    );
+  }
+}
+
+
+class UserInfo extends StatelessWidget {
+ 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(
+        top: 40,
+        left: 20,
+        right: 20,
+        bottom: 20,
+      ),
+      child: Row(
+        children: [
+          Column(
+            children: [
+              Text(
+                'Jane Cooper',
+                style: TextStyle(fontFamily: '', fontSize: 30),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Project manager',
+                style: TextStyle(fontFamily: '', fontSize: 20),
+              ),
+            ],
+          ),
+          Spacer(),
+          ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+            child: Image.asset('assets/Devicesavatar.png'),
+          ),
+        ],
+      ),
+    );
   }
 }
