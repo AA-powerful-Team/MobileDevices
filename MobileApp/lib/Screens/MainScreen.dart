@@ -232,7 +232,7 @@ class UpperSegmentBGB extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        top: 40,
+        top: 50,
         left: 20,
         right: 20,
         bottom: 20,
@@ -241,11 +241,181 @@ class UpperSegmentBGB extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            flex: 2,
+            flex: 1,
             child: UserInfo(),
           ),
-          
-         
+          SizedBox(
+            height: 25,
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              padding: EdgeInsets.only(
+                left: 100,
+                right: 20,
+              ),
+              width: 15,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(35))),
+            ),
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Expanded(
+            // my task HARDCODE
+            flex: 1,
+            child: Row(
+              children: [
+                Text(
+                  'My Task', //HARDCODED
+                  style: TextStyle(
+                    fontFamily: '',
+                    fontSize: 25, //HARDCODED
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            // to do 5 tasks
+            flex: 1,
+            child: Row(
+              children: [
+                Container(
+                  // color square
+                  decoration: BoxDecoration(
+                    color: Colors.purple,
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                      topLeft: Radius.circular(5),
+                    ),
+                  ),
+                  child: Container(
+                    // icon inside the square
+                    padding: EdgeInsets.all(15),
+                    child: Icon(
+                      // icon inside square
+                      Icons.assignment,
+                      color: Colors.white,
+                      size: 25,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 15),
+                Text(
+                  'To do', //HARDCODED
+                  style: TextStyle(
+                    fontFamily: '',
+                    fontSize: 25, //HARDCODED
+                  ),
+                ),
+                Spacer(),
+                Text(
+                  '5 tasks', //HARDCODED
+                  style: TextStyle(
+                    fontFamily: '',
+                    fontSize: 15, //HARDCODED
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            // In Progress 6 tasks
+            flex: 1,
+            child: Row(
+              children: [
+                Container(
+                  // color square
+                  decoration: BoxDecoration(
+                    color: Colors.orange,
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                      topLeft: Radius.circular(5),
+                    ),
+                  ),
+                  child: Container(
+                    // icon inside the square
+                    padding: EdgeInsets.all(15),
+                    child: Icon(
+                      // icon inside square
+                      Icons.assignment_late,
+                      color: Colors.white,
+                      size: 25,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 15),
+                Text(
+                  'In Progress', //HARDCODED
+                  style: TextStyle(
+                    fontFamily: '',
+                    fontSize: 25, //HARDCODED
+                  ),
+                ),
+                Spacer(),
+                Text(
+                  '6 tasks', //HARDCODED
+                  style: TextStyle(
+                    fontFamily: '',
+                    fontSize: 15, //HARDCODED
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            // done 25 tasks
+            flex: 1,
+            child: Row(
+              children: [
+                Container(
+                  // color square
+                  decoration: BoxDecoration(
+                    color: Colors.blue[100],
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                      topLeft: Radius.circular(5),
+                    ),
+                  ),
+                  child: Container(
+                    // icon inside the square
+                    padding: EdgeInsets.all(15),
+                    child: Icon(
+                      // icon inside square
+                      Icons.assignment_turned_in,
+                      color: Colors.white,
+                      size: 25,
+                    ),
+                  ),
+                ),
+                SizedBox(width: 15),
+                Text(
+                  'Done', //HARDCODED
+                  style: TextStyle(
+                    fontFamily: '',
+                    fontSize: 25, //HARDCODED
+                  ),
+                ),
+                Spacer(),
+                Text(
+                  '25 tasks', //HARDCODED
+                  style: TextStyle(
+                    fontFamily: '',
+                    fontSize: 15, //HARDCODED
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -256,7 +426,6 @@ class UserInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-
       child: Row(
         children: [
           Container(
@@ -278,7 +447,6 @@ class UserInfo extends StatelessWidget {
           Container(
             alignment: Alignment.topRight,
             child: ClipRRect(
-              
               borderRadius: BorderRadius.circular(10.0),
               child: Image.asset('assets/Devicesavatar.png'),
             ),
