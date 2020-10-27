@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../Widgets/widgets.dart';
 
 class MainUserScreen extends StatelessWidget {
   @override
@@ -114,93 +115,6 @@ class Appbar extends StatelessWidget {
   }
 }
 
-class TaskInformation extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 1,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.orange[600],
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(25),
-                topLeft: Radius.circular(25),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 20,
-          child: Container(
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(25),
-                topRight: Radius.circular(25),
-              ),
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                    flex: 2,
-                    child: Row(
-                      children: [
-                        Text(
-                          'Task name', //HARDCODED
-                          style: TextStyle(
-                            fontFamily: '',
-                            fontSize: 25, //HARDCODED
-                          ),
-                        ),
-                        SizedBox(width: 150), //HARDCODED
-                        Spacer(),
-                        Text(
-                          'priority',
-                          style: TextStyle(
-                              fontFamily: '', fontSize: 15), //HARDCODED
-                        ),
-                      ],
-                    )),
-                SizedBox(
-                  height: 15,
-                ),
-                Expanded(
-                    flex: 4,
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        'lorem ipsume fhjkasfjhnajhfjshnjcnasndjncansjncnajsndj',
-                        style: TextStyle(
-                          fontFamily: '',
-                          fontSize: 15,
-                        ),
-                      ),
-                    )),
-                Divider(height: 20),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Icon(Icons.timelapse),
-                        SizedBox(width: 20),
-                        Text('xx/xx/xxxx'),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        )
-      ],
-    );
-  }
-}
-
 class LowerSegmentTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -242,7 +156,10 @@ class UpperSegmentBGB extends StatelessWidget {
         children: [
           Expanded(
             flex: 1,
-            child: UserInfo(),
+            child: UserInfo(
+                name: 'Adrian Font',
+                rol: 'Project Manager',
+                path: 'assets/Devicesavatar.png'),
           ),
           SizedBox(
             height: 25,
@@ -260,7 +177,6 @@ class UpperSegmentBGB extends StatelessWidget {
                 padding: EdgeInsets.only(
                   left: 20,
                   right: 20,
-                 
                 ),
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -276,7 +192,10 @@ class UpperSegmentBGB extends StatelessWidget {
                     ),
                     SizedBox(width: 20),
                     Spacer(),
-                    Icon(Icons.search,size:30,),
+                    Icon(
+                      Icons.search,
+                      size: 30,
+                    ),
                   ],
                 ),
               ),
@@ -300,178 +219,35 @@ class UpperSegmentBGB extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-            // to do 5 tasks
-            flex: 1,
-            child: Row(
-              children: [
-                Container(
-                  // color square
-                  decoration: BoxDecoration(
-                    color: Colors.purple,
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(5),
-                      bottomLeft: Radius.circular(5),
-                      topRight: Radius.circular(5),
-                      topLeft: Radius.circular(5),
-                    ),
-                  ),
-                  child: Container(
-                    // icon inside the square
-                    padding: EdgeInsets.all(15),
-                    child: Icon(
-                      // icon inside square
-                      Icons.assignment,
-                      color: Colors.white,
-                      size: 25,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 15),
-                Text(
-                  'To do', //HARDCODED
-                  style: TextStyle(
-                    fontFamily: '',
-                    fontSize: 25, //HARDCODED
-                  ),
-                ),
-                Spacer(),
-                Text(
-                  '5 tasks', //HARDCODED
-                  style: TextStyle(
-                    fontFamily: '',
-                    fontSize: 15, //HARDCODED
-                  ),
-                ),
-              ],
+          TaskStatus(
+            colorIcon: Colors.purple,
+            iconSymbol: Icon(
+              Icons.assignment,
+              color: Colors.white,
+              size: 25,
             ),
+            statusname: 'To do',
+            numberTasks: '5 Tasks',
           ),
-          Expanded(
-            // In Progress 6 tasks
-            flex: 1,
-            child: Row(
-              children: [
-                Container(
-                  // color square
-                  decoration: BoxDecoration(
-                    color: Colors.orange,
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(5),
-                      bottomLeft: Radius.circular(5),
-                      topRight: Radius.circular(5),
-                      topLeft: Radius.circular(5),
-                    ),
-                  ),
-                  child: Container(
-                    // icon inside the square
-                    padding: EdgeInsets.all(15),
-                    child: Icon(
-                      // icon inside square
-                      Icons.assignment_late,
-                      color: Colors.white,
-                      size: 25,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 15),
-                Text(
-                  'In Progress', //HARDCODED
-                  style: TextStyle(
-                    fontFamily: '',
-                    fontSize: 25, //HARDCODED
-                  ),
-                ),
-                Spacer(),
-                Text(
-                  '6 tasks', //HARDCODED
-                  style: TextStyle(
-                    fontFamily: '',
-                    fontSize: 15, //HARDCODED
-                  ),
-                ),
-              ],
+          TaskStatus(
+            colorIcon: Colors.orange,
+            iconSymbol: Icon(
+              Icons.assignment_late,
+              color: Colors.white,
+              size: 25,
             ),
+            statusname: 'In Progress',
+            numberTasks: '6 Tasks',
           ),
-          Expanded(
-            // done 25 tasks
-            flex: 1,
-            child: Row(
-              children: [
-                Container(
-                  // color square
-                  decoration: BoxDecoration(
-                    color: Colors.blue[100],
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(5),
-                      bottomLeft: Radius.circular(5),
-                      topRight: Radius.circular(5),
-                      topLeft: Radius.circular(5),
-                    ),
-                  ),
-                  child: Container(
-                    // icon inside the square
-                    padding: EdgeInsets.all(15),
-                    child: Icon(
-                      // icon inside square
-                      Icons.assignment_turned_in,
-                      color: Colors.white,
-                      size: 25,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 15),
-                Text(
-                  'Done', //HARDCODED
-                  style: TextStyle(
-                    fontFamily: '',
-                    fontSize: 25, //HARDCODED
-                  ),
-                ),
-                Spacer(),
-                Text(
-                  '25 tasks', //HARDCODED
-                  style: TextStyle(
-                    fontFamily: '',
-                    fontSize: 15, //HARDCODED
-                  ),
-                ),
-              ],
+          TaskStatus(
+            colorIcon: Colors.blue[500],
+            iconSymbol: Icon(
+              Icons.assignment_turned_in,
+              color: Colors.white,
+              size: 25,
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class UserInfo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          Container(
-            child: Column(
-              children: [
-                Text(
-                  'Jane Cooper',
-                  style: TextStyle(fontFamily: '', fontSize: 30),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Project manager',
-                  style: TextStyle(fontFamily: '', fontSize: 20),
-                ),
-              ],
-            ),
-          ),
-          Spacer(),
-          Container(
-            alignment: Alignment.topRight,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10.0),
-              child: Image.asset('assets/Devicesavatar.png'),
-            ),
+            statusname: 'Done',
+            numberTasks: '25 Tasks',
           ),
         ],
       ),
