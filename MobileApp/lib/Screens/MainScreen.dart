@@ -233,8 +233,8 @@ class UpperSegmentBGB extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(
         top: 50,
-        left: 20,
-        right: 20,
+        left: 30,
+        right: 30,
         bottom: 20,
       ),
       child: Column(
@@ -251,13 +251,16 @@ class UpperSegmentBGB extends StatelessWidget {
             flex: 1,
             child: Container(
               padding: EdgeInsets.only(
-                left: 100,
-                right: 20,
+                left: 0,
+                right: 0,
+                bottom: 5,
+                top: 5,
               ),
-              width: 15,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(35))),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(45))),
+              ),
             ),
           ),
           SizedBox(
