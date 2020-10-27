@@ -230,21 +230,6 @@ class UpperSegmentBGB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        UserInfo(),
-        
-      ],
-    );
-  }
-}
-
-
-class UserInfo extends StatelessWidget {
- 
-  @override
-  Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
         top: 40,
@@ -252,25 +237,51 @@ class UserInfo extends StatelessWidget {
         right: 20,
         bottom: 20,
       ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            flex: 2,
+            child: UserInfo(),
+          ),
+          
+         
+        ],
+      ),
+    );
+  }
+}
+
+class UserInfo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
       child: Row(
         children: [
-          Column(
-            children: [
-              Text(
-                'Jane Cooper',
-                style: TextStyle(fontFamily: '', fontSize: 30),
-              ),
-              SizedBox(height: 10),
-              Text(
-                'Project manager',
-                style: TextStyle(fontFamily: '', fontSize: 20),
-              ),
-            ],
+          Container(
+            child: Column(
+              children: [
+                Text(
+                  'Jane Cooper',
+                  style: TextStyle(fontFamily: '', fontSize: 30),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Project manager',
+                  style: TextStyle(fontFamily: '', fontSize: 20),
+                ),
+              ],
+            ),
           ),
           Spacer(),
-          ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
-            child: Image.asset('assets/Devicesavatar.png'),
+          Container(
+            alignment: Alignment.topRight,
+            child: ClipRRect(
+              
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image.asset('assets/Devicesavatar.png'),
+            ),
           ),
         ],
       ),
