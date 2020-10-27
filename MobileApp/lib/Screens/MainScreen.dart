@@ -257,9 +257,28 @@ class UpperSegmentBGB extends StatelessWidget {
                 top: 5,
               ),
               child: Container(
+                padding: EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                 
+                ),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(45))),
+                child: Row(
+                  children: [
+                    Text(
+                      'Search', //HARDCODED
+                      style: TextStyle(
+                        fontFamily: '',
+                        fontSize: 25, //HARDCODED
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    Spacer(),
+                    Icon(Icons.search,size:30,),
+                  ],
+                ),
               ),
             ),
           ),
