@@ -232,7 +232,7 @@ class UpperSegmentBGB extends StatelessWidget {
               size: 25,
             ),
             statusname: 'To do',
-            numberTasks: '5 Tasks',
+            numberTasks: 5,
           ),
           TaskStatus(
             colorIcon: Colors.orange,
@@ -242,7 +242,7 @@ class UpperSegmentBGB extends StatelessWidget {
               size: 25,
             ),
             statusname: 'In Progress',
-            numberTasks: '6 Tasks',
+            numberTasks: 6 ,
           ),
           TaskStatus(
             colorIcon: Colors.blue[500],
@@ -252,7 +252,7 @@ class UpperSegmentBGB extends StatelessWidget {
               size: 25,
             ),
             statusname: 'Done',
-            numberTasks: '25 Tasks',
+            numberTasks: 25,
           ),
         ],
       ),

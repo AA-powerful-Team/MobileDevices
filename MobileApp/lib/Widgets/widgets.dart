@@ -63,7 +63,7 @@ class TaskStatus extends StatelessWidget {
   final Color colorIcon;
   final Icon iconSymbol;
   final String statusname;
-  final String numberTasks;
+  final int numberTasks;
 
   const TaskStatus({
     @required this.colorIcon,
@@ -106,7 +106,7 @@ class TaskStatus extends StatelessWidget {
           ),
           Spacer(),
           Text(
-            '$numberTasks',
+            '$numberTasks tasks',
             style: TextStyle(
               fontFamily: '',
               fontSize: 15,
