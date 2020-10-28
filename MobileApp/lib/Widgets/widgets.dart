@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
 
+enum EnumPriority { HIGH, MID, LOW }  //task priority enum
+
+class Date {  //date limit for task
+  int day, month, year;
+
+//constructor
+  Date(this.day, this.month, this.year);
+}
+
+
+
 class UserInfo extends StatelessWidget {
+
   final String name;
   final String rol;
   final String path;
@@ -48,20 +60,17 @@ class UserInfo extends StatelessWidget {
 class TaskStatus extends StatelessWidget {
   //State of task list
 
- final Color colorIcon;
- final Icon iconSymbol;
- final String statusname;
- final String numberTasks;
+  final Color colorIcon;
+  final Icon iconSymbol;
+  final String statusname;
+  final String numberTasks;
 
   const TaskStatus({
-   
-   @required this.colorIcon,
-   @required this.iconSymbol,
-   @required this.statusname,
-   @required this.numberTasks,
-
+    @required this.colorIcon,
+    @required this.iconSymbol,
+    @required this.statusname,
+    @required this.numberTasks,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -89,18 +98,18 @@ class TaskStatus extends StatelessWidget {
           ),
           SizedBox(width: 15),
           Text(
-            '$statusname', 
+            '$statusname',
             style: TextStyle(
               fontFamily: '',
-              fontSize: 25, 
+              fontSize: 25,
             ),
           ),
           Spacer(),
           Text(
-            '$numberTasks', 
+            '$numberTasks',
             style: TextStyle(
               fontFamily: '',
-              fontSize: 15, 
+              fontSize: 15,
             ),
           ),
         ],
@@ -110,6 +119,18 @@ class TaskStatus extends StatelessWidget {
 }
 
 class TaskInformation extends StatelessWidget {
+  
+  final String taskName;
+  final EnumPriority taksPriority;
+  final String description;
+  final Date date;
+
+  const TaskInformation({
+    @required this.taskName,
+    @required this.taksPriority,
+    @required this.description,
+    @required this.date,
+  });
 
   //Description and data about task
   @override
@@ -146,18 +167,18 @@ class TaskInformation extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          'Task name', //HARDCODED
+                          '$taskName', 
                           style: TextStyle(
                             fontFamily: '',
-                            fontSize: 25, //HARDCODED
+                            fontSize: 25, 
                           ),
                         ),
-                        SizedBox(width: 150), //HARDCODED
+                        SizedBox(width: 150), 
                         Spacer(),
                         Text(
-                          'priority',
+                          returnStringPriority(taksPriority),
                           style: TextStyle(
-                              fontFamily: '', fontSize: 15), //HARDCODED
+                              fontFamily: '', fontSize: 15), 
                         ),
                       ],
                     )),
@@ -169,7 +190,7 @@ class TaskInformation extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        'lorem ipsume fhjkasfjhnajhfjshnjcnasndjncansjncnajsndj',
+                        '$description',
                         style: TextStyle(
                           fontFamily: '',
                           fontSize: 15,
@@ -184,7 +205,13 @@ class TaskInformation extends StatelessWidget {
                       children: [
                         Icon(Icons.timelapse),
                         SizedBox(width: 20),
-                        Text('xx/xx/xxxx'),
+                        Text(
+                          returnStringDate(date.day,date.month,date.year),
+                          style: TextStyle(
+                            fontFamily: '',
+                            fontSize: 15,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -196,4 +223,33 @@ class TaskInformation extends StatelessWidget {
       ],
     );
   }
+
+
+String returnStringDate(int d,int m, int y) => '$d/$m/${y}';
+
+
+String returnStringPriority(EnumPriority p) {
+  String taskP;
+
+  switch (p) {
+    case EnumPriority.HIGH:
+      taskP = 'high priority';
+
+      break;
+    case EnumPriority.MID:
+      taskP = 'mid priority';
+
+      break;
+
+    case EnumPriority.LOW:
+      taskP = 'low priority';
+
+      break;
+  }
+
+  return taskP;
+}
+
+ 
+
 }

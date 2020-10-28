@@ -71,7 +71,12 @@ class LowerSegmentBGB extends StatelessWidget {
             ),
             Expanded(
               flex: 4, //middlebox
-              child: TaskInformation(),
+              child: TaskInformation(
+                taskName: 'Mobile App',
+                taksPriority: EnumPriority.HIGH,
+                description: 'lorem ipsum blablalbalblablal',
+                date: Date(01,10,2020),
+              ),
             ),
             SizedBox(height: 15),
             Expanded(
