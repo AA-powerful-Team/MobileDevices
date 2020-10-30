@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Widgets/widgets.dart';
-import '../Widgets/dataStructures.dart';
+import 'MainScreenData.dart';
 import 'package:provider/provider.dart';
 
 

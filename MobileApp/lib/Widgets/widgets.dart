@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dataStructures.dart';
+import '../Screens/MainScreenData.dart';
+
+
+
 
 
 class UserInfo extends StatelessWidget {
