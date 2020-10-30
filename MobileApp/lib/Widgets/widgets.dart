@@ -225,7 +225,7 @@ class TaskInformation extends StatelessWidget {
   }
 
 
-String returnStringDate(int d,int m, int y) => '$d/$m/${y}';
+String returnStringDate(int d,int m, int y) => '$d/$m/$y';
 
 
 String returnStringPriority(EnumPriority p) {
