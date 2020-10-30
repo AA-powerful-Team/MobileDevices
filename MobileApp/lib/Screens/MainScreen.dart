@@ -6,72 +6,59 @@ import 'package:provider/provider.dart';
 //Global vars
 
 List<BacklogCanvasElem> ecList = [
- 
   BacklogCanvasElem(
     elementColorIcon: Colors.purple,
-    elementIconSymbol:Icon(
-              Icons.assignment,
-              color: Colors.white,
-              size: 25,
-            ),
+    elementIconSymbol: Icon(
+      Icons.assignment,
+      color: Colors.white,
+      size: 25,
+    ),
     elementStatusname: 'To do',
     elementNumberTasks: 5,
-
   ),
-    BacklogCanvasElem(
+  BacklogCanvasElem(
     elementColorIcon: Colors.orange,
-    elementIconSymbol:Icon(
-              Icons.assignment_late,
-              color: Colors.white,
-              size: 25,
-            ),
+    elementIconSymbol: Icon(
+      Icons.assignment_late,
+      color: Colors.white,
+      size: 25,
+    ),
     elementStatusname: 'In Progress',
     elementNumberTasks: 6,
-
   ),
-
   BacklogCanvasElem(
     elementColorIcon: Colors.blue[500],
     elementIconSymbol: Icon(
-              Icons.assignment_turned_in,
-              color: Colors.white,
-              size: 25,
-            ),
+      Icons.assignment_turned_in,
+      color: Colors.white,
+      size: 25,
+    ),
     elementStatusname: 'Done',
     elementNumberTasks: 25,
-    
-    )
-  
+  )
 ];
 
 List<Task> taskList = [
-
-Task(
-  taskName: 'Mobile App',
-  taskPriority: EnumPriority.HIGH,
-  taskDescription:'lorem ipsum blablalbalblablal',
-  milestone: Date(01, 10, 2020),
-),
-
-
+  Task(
+    taskName: 'Mobile App',
+    taskPriority: EnumPriority.HIGH,
+    taskDescription: 'deserunt ullamco est sit aliqua dolor do amet sint',
+    milestone: Date(01, 10, 2020),
+  ),
 ];
 
 final exampleOne = MainScreenUserData(
-  
   screenUser: User(
       userName: 'Jane Copper',
       userRol: 'Product Manager',
-      userPicPath: 'assets/Devicesavatar.png'
-      ),
-     canvasList: ecList,//canvas backlog list
-      screenTasks: taskList,//Task descripotions list
- 
+      userPicPath: 'assets/Devicesavatar.png'),
+  canvasList: ecList, //canvas backlog list
+  screenTasks: taskList, //Task descripotions list
 );
 
 //---------------------------------------------------------
 
 class MainUserScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Provider<MainScreenUserData>.value(
@@ -118,7 +105,8 @@ class LowerSegmentBGB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  final MainScreenUserData screenData= Provider.of<MainScreenUserData>(context);
+    final MainScreenUserData screenData =
+        Provider.of<MainScreenUserData>(context);
     return Container(
       //Green Rect
       decoration: BoxDecoration(
@@ -145,10 +133,11 @@ class LowerSegmentBGB extends StatelessWidget {
             ),
             Expanded(
               flex: 4, //middlebox
-              child: TaskInformation( //NOTE: we should create a system to display multiple elems,we should create a for and  travel the list displaying each elem
+              child: TaskInformation(
+                //NOTE: we should create a system to display multiple elems,we should create a for and  travel the list displaying each elem
                 taskName: screenData.screenTasks[0].taskName,
                 taksPriority: screenData.screenTasks[0].taskPriority,
-                description:  screenData.screenTasks[0].taskDescription,
+                description: screenData.screenTasks[0].taskDescription,
                 date: screenData.screenTasks[0].milestone,
               ),
             ),
@@ -203,15 +192,20 @@ class LowerSegmentTitle extends StatelessWidget {
         Text(
           'Recently Assigned', //HARDCODED
           style: TextStyle(
-            fontFamily: '',
-            fontSize: 25, //HARDCODED
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w700,
+            fontSize: 30, //HARDCODED
           ),
         ),
-        SizedBox(width: 150), //HARDCODED
+        SizedBox(width: 100), //HARDCODED
         Spacer(),
         Text(
-          'All tasks',
-          style: TextStyle(fontFamily: '', fontSize: 15), //HARDCODED
+          'All Tasks',
+          style: TextStyle(
+            fontFamily: 'Roboto',
+            fontSize: 20,
+            fontWeight: FontWeight.w300,
+          ), //HARDCODED
         ),
       ],
     );
@@ -223,8 +217,8 @@ class UpperSegmentBGB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-   final MainScreenUserData screenData= Provider.of<MainScreenUserData>(context);
+    final MainScreenUserData screenData =
+        Provider.of<MainScreenUserData>(context);
     return Container(
       padding: EdgeInsets.only(
         top: 50,
@@ -267,7 +261,8 @@ class UpperSegmentBGB extends StatelessWidget {
                     Text(
                       'Search', //HARDCODED
                       style: TextStyle(
-                        fontFamily: '',
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w300,
                         fontSize: 25, //HARDCODED
                       ),
                     ),
@@ -293,15 +288,17 @@ class UpperSegmentBGB extends StatelessWidget {
                 Text(
                   'My Task', //HARDCODED
                   style: TextStyle(
-                    fontFamily: '',
-                    fontSize: 25, //HARDCODED
+                    fontFamily: 'Roboto',
+                    fontSize: 30, //HARDCODED
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ],
             ),
           ),
-          TaskStatus( //NOTE: we should create a system to display multiple elems,we should create a for and  travel the list displaying each elem
-            colorIcon: screenData.canvasList[0].elementColorIcon ,
+          TaskStatus(
+            //NOTE: we should create a system to display multiple elems,we should create a for and  travel the list displaying each elem
+            colorIcon: screenData.canvasList[0].elementColorIcon,
             iconSymbol: screenData.canvasList[0].elementIconSymbol,
             statusname: screenData.canvasList[0].elementStatusname,
             numberTasks: screenData.canvasList[0].elementNumberTasks,

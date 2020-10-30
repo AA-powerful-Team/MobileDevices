@@ -23,12 +23,12 @@ jane Cooper 				size: 30 weight 700
 Project Manager 			size: 20 weight 300
 search					size 25 weight 300
 
-My task
+My task					size: 30 weight 700
 to do, In Progress, Done 		size 25 weight 500
 5 task, 6 task, 25 tasks		size 15 weight 100
 
-Recently assigned			size 25 weight 500		
-All task				size 15 weight 100
+Recently assigned			size 30 weight 500		
+All task				size 20 weight 300
 
 Mobile App 				size 25 weight 500
 high priority 				size 15 weight 100

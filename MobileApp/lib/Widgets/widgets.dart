@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Screens/MainScreenData.dart';
 
-
-
-
-
 class UserInfo extends StatelessWidget {
-
   final String name;
   final String rol;
   final String path;
@@ -27,12 +22,20 @@ class UserInfo extends StatelessWidget {
               children: [
                 Text(
                   '$name',
-                  style: TextStyle(fontFamily: '', fontSize: 30),
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
                 SizedBox(height: 10),
                 Text(
                   '$rol',
-                  style: TextStyle(fontFamily: '', fontSize: 20),
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
               ],
             ),
@@ -78,10 +81,10 @@ class TaskStatus extends StatelessWidget {
             decoration: BoxDecoration(
               color: colorIcon,
               borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(5),
-                bottomLeft: Radius.circular(5),
-                topRight: Radius.circular(5),
-                topLeft: Radius.circular(5),
+                bottomRight: Radius.circular(15),
+                bottomLeft: Radius.circular(15),
+                topRight: Radius.circular(15),
+                topLeft: Radius.circular(15),
               ),
             ),
             child: Container(
@@ -94,16 +97,18 @@ class TaskStatus extends StatelessWidget {
           Text(
             '$statusname',
             style: TextStyle(
-              fontFamily: '',
-              fontSize: 25,
+              fontFamily: 'Roboto',
+              fontSize: 22,
+              fontWeight: FontWeight.w500,
             ),
           ),
           Spacer(),
           Text(
             '$numberTasks tasks',
             style: TextStyle(
-              fontFamily: '',
-              fontSize: 15,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w300,
+              fontSize: 20,
             ),
           ),
         ],
@@ -113,7 +118,6 @@ class TaskStatus extends StatelessWidget {
 }
 
 class TaskInformation extends StatelessWidget {
-  
   final String taskName;
   final EnumPriority taksPriority;
   final String description;
@@ -161,18 +165,22 @@ class TaskInformation extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          '$taskName', 
+                          '$taskName',
                           style: TextStyle(
-                            fontFamily: '',
-                            fontSize: 25, 
+                            fontFamily: 'Roboto',
+                            fontSize: 25,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(width: 150), 
+                        SizedBox(width: 150),
                         Spacer(),
                         Text(
                           returnStringPriority(taksPriority),
                           style: TextStyle(
-                              fontFamily: '', fontSize: 15), 
+                            fontFamily: 'Roboto',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
                       ],
                     )),
@@ -186,8 +194,9 @@ class TaskInformation extends StatelessWidget {
                       child: Text(
                         '$description',
                         style: TextStyle(
-                          fontFamily: '',
-                          fontSize: 15,
+                          fontFamily: 'Roboto',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w100,
                         ),
                       ),
                     )),
@@ -200,10 +209,11 @@ class TaskInformation extends StatelessWidget {
                         Icon(Icons.timelapse),
                         SizedBox(width: 20),
                         Text(
-                          returnStringDate(date.day,date.month,date.year),
+                          returnStringDate(date.day, date.month, date.year),
                           style: TextStyle(
-                            fontFamily: '',
+                            fontFamily: 'Roboto',
                             fontSize: 15,
+                            fontWeight: FontWeight.w100,
                           ),
                         ),
                       ],
@@ -218,32 +228,27 @@ class TaskInformation extends StatelessWidget {
     );
   }
 
+  String returnStringDate(int d, int m, int y) => '$d/$m/$y';
 
-String returnStringDate(int d,int m, int y) => '$d/$m/$y';
+  String returnStringPriority(EnumPriority p) {
+    String taskP;
 
+    switch (p) {
+      case EnumPriority.HIGH:
+        taskP = 'High Priority';
 
-String returnStringPriority(EnumPriority p) {
-  String taskP;
+        break;
+      case EnumPriority.MID:
+        taskP = 'Mid Priority';
 
-  switch (p) {
-    case EnumPriority.HIGH:
-      taskP = 'high priority';
+        break;
 
-      break;
-    case EnumPriority.MID:
-      taskP = 'mid priority';
+      case EnumPriority.LOW:
+        taskP = 'Low Priority';
 
-      break;
+        break;
+    }
 
-    case EnumPriority.LOW:
-      taskP = 'low priority';
-
-      break;
+    return taskP;
   }
-
-  return taskP;
-}
-
- 
-
 }
