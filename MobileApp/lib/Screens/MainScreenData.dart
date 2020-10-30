@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 
 // Widgets DATA---------------------------------------------------------------------------
-enum EnumPriority { HIGH, MID, LOW }  //task priority enum
+enum EnumPriority { HIGH, MID, LOW } //task priority enum
 
-class Date {  //date limit for task
+class Date {
+  //date limit for task
   int day, month, year;
 
 //constructor
@@ -12,8 +12,17 @@ class Date {  //date limit for task
 }
 
 
+//SCREEN DATA CLASSES
 
-//SCREEN DATA---------------------------------------------------------------------------
+
+class MainScreenUserData {
+  final User screenUser;
+  final List<BacklogCanvasElem> canvasList;
+  final List<Task> screenTasks;
+
+  MainScreenUserData({this.screenUser, this.canvasList, this.screenTasks});
+}
+
 class User {
   final String userName;
   final String userRol;
@@ -23,29 +32,26 @@ class User {
 }
 
 class BacklogCanvasElem {
+  final Color elementColorIcon;
+  final Icon elementIconSymbol;
+  final String elementStatusname;
+  final int elementNumberTasks;
 
-  final Color backlogCanvasElement_ColorIcon;
-  final Icon backlogCanvasElement_IconSymbol;
-  final String backlogCanvasElement_Statusname;
-  final int backlogCanvasElement_NumberTasks;
-
-
-  BacklogCanvasElem(
-      this.backlogCanvasElement_ColorIcon,
-      this.backlogCanvasElement_IconSymbol,
-      this.backlogCanvasElement_Statusname,
-      this.backlogCanvasElement_NumberTasks
-      );
+  BacklogCanvasElem({
+      this.elementColorIcon,
+      this.elementIconSymbol,
+      this.elementStatusname,
+      this.elementNumberTasks});
 }
 
-class Task{
+class Task {
+  final String taskName;
+  final EnumPriority taskPriority;
+  final String taskDescription;
+  final Date milestone;
 
-final String task_name;
-final EnumPriority task_priority;
-final String task_description;
-final Date milestone;
-
-  Task(this.task_name, this.task_priority, this.task_description, this.milestone);
-
-
+  Task({this.taskName, this.taskPriority, this.taskDescription,
+      this.milestone});
 }
+
+

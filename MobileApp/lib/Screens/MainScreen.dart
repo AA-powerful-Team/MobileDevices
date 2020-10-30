@@ -3,20 +3,89 @@ import '../Widgets/widgets.dart';
 import 'MainScreenData.dart';
 import 'package:provider/provider.dart';
 
+//Global vars
 
+List<BacklogCanvasElem> ecList = [
+ 
+  BacklogCanvasElem(
+    elementColorIcon: Colors.purple,
+    elementIconSymbol:Icon(
+              Icons.assignment,
+              color: Colors.white,
+              size: 25,
+            ),
+    elementStatusname: 'To do',
+    elementNumberTasks: 5,
+
+  ),
+    BacklogCanvasElem(
+    elementColorIcon: Colors.orange,
+    elementIconSymbol:Icon(
+              Icons.assignment_late,
+              color: Colors.white,
+              size: 25,
+            ),
+    elementStatusname: 'In Progress',
+    elementNumberTasks: 6,
+
+  ),
+
+  BacklogCanvasElem(
+    elementColorIcon: Colors.blue[500],
+    elementIconSymbol: Icon(
+              Icons.assignment_turned_in,
+              color: Colors.white,
+              size: 25,
+            ),
+    elementStatusname: 'Done',
+    elementNumberTasks: 25,
+    
+    )
+  
+];
+
+List<Task> taskList = [
+
+Task(
+  taskName: 'Mobile App',
+  taskPriority: EnumPriority.HIGH,
+  taskDescription:'lorem ipsum blablalbalblablal',
+  milestone: Date(01, 10, 2020),
+),
+
+
+];
+
+final exampleOne = MainScreenUserData(
+  
+  screenUser: User(
+      userName: 'Jane Copper',
+      userRol: 'Product Manager',
+      userPicPath: 'assets/Devicesavatar.png'
+      ),
+     canvasList: ecList,//canvas backlog list
+      screenTasks: taskList,//Task descripotions list
+ 
+);
+
+//---------------------------------------------------------
 
 class MainUserScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        //Column One : STRUCTURE OF THE WHOLE SCREEN
-        children: [
-          Expanded(
-            flex: 2,
-            child: BaseBackground(),
-          ),
-        ],
+    return Provider<MainScreenUserData>.value(
+      value: exampleOne,
+      child: Scaffold(
+        body: Column(
+          //Column One : STRUCTURE OF THE WHOLE SCREEN
+          children: [
+            Expanded(
+              flex: 2,
+              child: BaseBackground(),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -49,6 +118,7 @@ class LowerSegmentBGB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  final MainScreenUserData screenData= Provider.of<MainScreenUserData>(context);
     return Container(
       //Green Rect
       decoration: BoxDecoration(
@@ -75,11 +145,11 @@ class LowerSegmentBGB extends StatelessWidget {
             ),
             Expanded(
               flex: 4, //middlebox
-              child: TaskInformation(
-                taskName: 'Mobile App',
-                taksPriority: EnumPriority.HIGH,
-                description: 'lorem ipsum blablalbalblablal',
-                date: Date(01,10,2020),
+              child: TaskInformation( //NOTE: we should create a system to display multiple elems,we should create a for and  travel the list displaying each elem
+                taskName: screenData.screenTasks[0].taskName,
+                taksPriority: screenData.screenTasks[0].taskPriority,
+                description:  screenData.screenTasks[0].taskDescription,
+                date: screenData.screenTasks[0].milestone,
               ),
             ),
             SizedBox(height: 15),
@@ -153,6 +223,8 @@ class UpperSegmentBGB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+   final MainScreenUserData screenData= Provider.of<MainScreenUserData>(context);
     return Container(
       padding: EdgeInsets.only(
         top: 50,
@@ -166,9 +238,9 @@ class UpperSegmentBGB extends StatelessWidget {
           Expanded(
             flex: 1,
             child: UserInfo(
-                name: 'Adrian Font',
-                rol: 'Project Manager',
-                path: 'assets/Devicesavatar.png'),
+                name: screenData.screenUser.userName,
+                rol: screenData.screenUser.userRol,
+                path: screenData.screenUser.userPicPath),
           ),
           SizedBox(
             height: 25,
@@ -228,15 +300,11 @@ class UpperSegmentBGB extends StatelessWidget {
               ],
             ),
           ),
-          TaskStatus(
-            colorIcon: Colors.purple,
-            iconSymbol: Icon(
-              Icons.assignment,
-              color: Colors.white,
-              size: 25,
-            ),
-            statusname: 'To do',
-            numberTasks: 5,
+          TaskStatus( //NOTE: we should create a system to display multiple elems,we should create a for and  travel the list displaying each elem
+            colorIcon: screenData.canvasList[0].elementColorIcon ,
+            iconSymbol: screenData.canvasList[0].elementIconSymbol,
+            statusname: screenData.canvasList[0].elementStatusname,
+            numberTasks: screenData.canvasList[0].elementNumberTasks,
           ),
           TaskStatus(
             colorIcon: Colors.orange,
@@ -246,7 +314,7 @@ class UpperSegmentBGB extends StatelessWidget {
               size: 25,
             ),
             statusname: 'In Progress',
-            numberTasks: 6 ,
+            numberTasks: 6,
           ),
           TaskStatus(
             colorIcon: Colors.blue[500],
