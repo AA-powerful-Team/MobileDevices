@@ -160,36 +160,7 @@ class _LowerSegmentBGB extends StatelessWidget {
   }
 }
 
-class Appbar extends StatelessWidget {//NOTE: this will not be private due to its a future development widget
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Icon(
-          Icons.home,
-          color: Colors.grey,
-          size: 50,
-        ),
-        Icon(
-          Icons.calendar_view_day_outlined,
-          color: Colors.grey,
-          size: 50,
-        ),
-        Icon(
-          Icons.calendar_today_rounded,
-          color: Colors.grey,
-          size: 40,
-        ),
-        Icon(
-          Icons.person,
-          color: Colors.grey,
-          size: 50,
-        ),
-      ],
-    );
-  }
-}
+
 
 class _LowerSegmentTitle extends StatelessWidget {
   @override
@@ -299,7 +270,7 @@ class _UpperSegmentBGB extends StatelessWidget {
                  screenData.titles[0], //HARDCODED
                   style: TextStyle(
                     fontFamily: 'Roboto',
-                    fontSize: 30, //HARDCODED
+                    fontSize: 30, 
                     fontWeight: FontWeight.w700,
                   ),
                 ),

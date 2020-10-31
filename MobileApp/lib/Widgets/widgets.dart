@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Screens/MainScreenData.dart';
 
-
 class UserInfo extends StatelessWidget {
   final String name;
   final String rol;
@@ -116,8 +115,6 @@ class TaskStatus extends StatelessWidget {
       ),
     );
   }
-
-  
 }
 
 class TaskInformation extends StatelessWidget {
@@ -231,70 +228,112 @@ class TaskInformation extends StatelessWidget {
     );
   }
 
-  String returnStringDate(int d, int m, int y) => '$d/$m/$y';
+  String returnStringDate(int d, int m, int y) {
 
-  
+    bool lwD = false;
+    bool lwM=false;
 
+    if (d < 10) {
+      lwD = true;
+    }
+    if(m<10){
+
+      lwM =true;
+
+    }
+
+  if(lwD && lwM)
+    return '0$d/0$m/$y';
+  else if(!lwD && lwM)
+    return '$d/0$m/$y';
+  else if(lwD && !lwM)
+    return '0$d/$m/$y';
+  else
+   return '$d/$m/$y';
+
+  }
+}
+
+class Appbar extends StatelessWidget {
+  //NOTE: this will not be private due to its a future development widget
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Icon(
+          Icons.home,
+          color: Colors.grey,
+          size: 50,
+        ),
+        Icon(
+          Icons.calendar_view_day_outlined,
+          color: Colors.grey,
+          size: 50,
+        ),
+        Icon(
+          Icons.calendar_today_rounded,
+          color: Colors.grey,
+          size: 40,
+        ),
+        Icon(
+          Icons.person,
+          color: Colors.grey,
+          size: 50,
+        ),
+      ],
+    );
+  }
 }
 
 String returnStringPriority(EnumPriority p) {
-    String taskP;
+  String taskP;
 
-    switch (p) {
-      case EnumPriority.HIGH:
-        taskP = 'High Priority';
+  switch (p) {
+    case EnumPriority.HIGH:
+      taskP = 'High Priority';
 
-        break;
-      case EnumPriority.MID:
-        taskP = 'Mid Priority';
+      break;
+    case EnumPriority.MID:
+      taskP = 'Mid Priority';
 
-        break;
+      break;
 
-      case EnumPriority.LOW:
-        taskP = 'Low Priority';
+    case EnumPriority.LOW:
+      taskP = 'Low Priority';
 
-        break;
-    }
-
-    return taskP;
+      break;
   }
 
-String returnStringTaskType(EnumTaskType t){
+  return taskP;
+}
 
+String returnStringTaskType(EnumTaskType t) {
   String taskT;
 
-    switch (t) {
-      case EnumTaskType.ALL:
-        taskT = 'All Task';
-        break;
-    }
-    return taskT;
+  switch (t) {
+    case EnumTaskType.ALL:
+      taskT = 'All Task';
+      break;
   }
+  return taskT;
+}
 
 TaskStatus returnBacklogList(MainScreenUserData data, {int i = 0}) {
-    // NOTE:not the best place to locate the funtion but for now will do
+  // NOTE:not the best place to locate the funtion but for now will do
 
-    
-    TaskStatus aux;
+  TaskStatus aux;
 
-    if(i<data.canvasList.length){
+  if (i < data.canvasList.length) {
+    aux = TaskStatus(
+      colorIcon: data.canvasList[i].elementColorIcon,
+      iconSymbol: data.canvasList[i].elementIconSymbol,
+      statusname: data.canvasList[i].elementStatusname,
+      numberTasks: data.canvasList[i].elementNumberTasks,
+    );
 
-      aux = TaskStatus(
-       
-        colorIcon: data.canvasList[i].elementColorIcon,
-        iconSymbol: data.canvasList[i].elementIconSymbol,
-        statusname: data.canvasList[i].elementStatusname,
-        numberTasks: data.canvasList[i].elementNumberTasks,
+    returnBacklogList(data, i: ++i);
 
-        
-      );
-        
-        returnBacklogList(data,i:++i);
-
-       return aux;
-    
-    }
-
-
-   
+    return aux;
   }
+}
