@@ -77,7 +77,7 @@ class MainUserScreen extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: BaseBackground(),
+              child: _BaseBackground(),
             ),
           ],
         ),
@@ -86,7 +86,7 @@ class MainUserScreen extends StatelessWidget {
   }
 }
 
-class BaseBackground extends StatelessWidget {
+class _BaseBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -96,11 +96,11 @@ class BaseBackground extends StatelessWidget {
         children: [
           Expanded(
             flex: 3,
-            child: UpperSegmentBGB(), //invisible Rect
+            child: _UpperSegmentBGB(), //invisible Rect
           ),
           Expanded(
             flex: 2,
-            child: LowerSegmentBGB(),
+            child: _LowerSegmentBGB(),
           ),
         ],
       ),
@@ -108,7 +108,7 @@ class BaseBackground extends StatelessWidget {
   }
 }
 
-class LowerSegmentBGB extends StatelessWidget {
+class _LowerSegmentBGB extends StatelessWidget {
   //Lower part of the background base(BGB)
 
   @override
@@ -137,7 +137,7 @@ class LowerSegmentBGB extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: LowerSegmentTitle(),
+              child: _LowerSegmentTitle(),
             ),
             Expanded(
               flex: 4, //middlebox
@@ -160,7 +160,7 @@ class LowerSegmentBGB extends StatelessWidget {
   }
 }
 
-class Appbar extends StatelessWidget {
+class Appbar extends StatelessWidget {//NOTE: this will not be private due to its a future development widget
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -191,7 +191,7 @@ class Appbar extends StatelessWidget {
   }
 }
 
-class LowerSegmentTitle extends StatelessWidget {
+class _LowerSegmentTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      final MainScreenUserData screenData =
@@ -222,7 +222,7 @@ class LowerSegmentTitle extends StatelessWidget {
   }
 }
 
-class UpperSegmentBGB extends StatelessWidget {
+class _UpperSegmentBGB extends StatelessWidget {
   //Upper part of the background base(BGB)
 
   @override
