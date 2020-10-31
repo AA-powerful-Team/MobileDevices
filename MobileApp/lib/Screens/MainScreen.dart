@@ -32,7 +32,7 @@ class _BaseBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red,
+      color: Colors.orange[50],
       child: Column(
         //Column Two
         children: [
@@ -60,7 +60,7 @@ class _LowerSegmentBGB extends StatelessWidget {
     return Container(
       //Green Rect
       decoration: BoxDecoration(
-        color: Colors.green,
+        color: Colors.white,
         borderRadius: BorderRadius.only(
           bottomRight: Radius.circular(30),
           bottomLeft: Radius.circular(30),
@@ -227,24 +227,16 @@ class _UpperSegmentBGB extends StatelessWidget {
             numberTasks: screenData.canvasList[0].elementNumberTasks,
           ),
           TaskStatus(
-            colorIcon: Colors.orange,
-            iconSymbol: Icon(
-              Icons.assignment_late,
-              color: Colors.white,
-              size: 25,
-            ),
-            statusname: 'In Progress',
-            numberTasks: 6,
+            colorIcon: screenData.canvasList[1].elementColorIcon,
+            iconSymbol: screenData.canvasList[1].elementIconSymbol,
+            statusname: screenData.canvasList[1].elementStatusname,
+            numberTasks: screenData.canvasList[1].elementNumberTasks,
           ),
           TaskStatus(
-            colorIcon: Colors.blue[500],
-            iconSymbol: Icon(
-              Icons.assignment_turned_in,
-              color: Colors.white,
-              size: 25,
-            ),
-            statusname: 'Done',
-            numberTasks: 25,
+            colorIcon: screenData.canvasList[2].elementColorIcon,
+            iconSymbol: screenData.canvasList[2].elementIconSymbol,
+            statusname: screenData.canvasList[2].elementStatusname,
+            numberTasks: screenData.canvasList[2].elementNumberTasks,
           ),
         ],
       ),

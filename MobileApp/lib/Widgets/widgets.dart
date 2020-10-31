@@ -43,6 +43,16 @@ class UserInfo extends StatelessWidget {
           Spacer(),
           Container(
             alignment: Alignment.topRight,
+            decoration: BoxDecoration(
+               boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 0,
+                  blurRadius: 10,
+                  offset: Offset(0,-4), // changes position of shadow
+                ),
+              ],
+            ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: Image.asset('$path'),
@@ -139,7 +149,7 @@ class TaskInformation extends StatelessWidget {
           flex: 1,
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.orange[600],
+              color: Colors.deepOrange[400],
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(25),
                 topLeft: Radius.circular(25),
@@ -148,7 +158,7 @@ class TaskInformation extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 20,
+          flex: 30,
           child: Container(
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
@@ -157,6 +167,14 @@ class TaskInformation extends StatelessWidget {
                 bottomRight: Radius.circular(25),
                 topRight: Radius.circular(25),
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 1,
+                  blurRadius: 7,
+                  offset: Offset(0,6), // changes position of shadow
+                ),
+              ],
             ),
             child: Column(
               children: [
@@ -195,7 +213,7 @@ class TaskInformation extends StatelessWidget {
                         '$description',
                         style: TextStyle(
                           fontFamily: 'Roboto',
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w100,
                         ),
                       ),
@@ -229,19 +247,16 @@ class TaskInformation extends StatelessWidget {
   }
 
   String returnStringDate(int d, int m, int y) {
-
     bool lwD = false;
-    
+
     if (d < 10) {
       lwD = true;
     }
 
-  if(lwD)
-    return '0$d ${monthString[m-1]} $y';
-  else
-    return '$d ${monthString[m-1]} $y';
-
-
+    if (lwD)
+      return '0$d ${monthString[m - 1]} $y';
+    else
+      return '$d ${monthString[m - 1]} $y';
   }
 }
 
@@ -254,22 +269,22 @@ class Appbar extends StatelessWidget {
       children: [
         Icon(
           Icons.home,
-          color: Colors.grey,
+          color: Colors.grey[400],
           size: 50,
         ),
         Icon(
           Icons.calendar_view_day_outlined,
-          color: Colors.grey,
+          color: Colors.grey[400],
           size: 50,
         ),
         Icon(
           Icons.calendar_today_rounded,
-          color: Colors.grey,
+          color: Colors.grey[400],
           size: 40,
         ),
         Icon(
           Icons.person,
-          color: Colors.grey,
+          color: Colors.grey[400],
           size: 50,
         ),
       ],

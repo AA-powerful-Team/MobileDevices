@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 List<BacklogCanvasElem> ecList = [
   BacklogCanvasElem(
-    elementColorIcon: Colors.purple,
+    elementColorIcon: Colors.deepPurple,
     elementIconSymbol: Icon(
       Icons.assignment,
       color: Colors.white,
@@ -16,7 +16,7 @@ List<BacklogCanvasElem> ecList = [
     elementNumberTasks: 5,
   ),
   BacklogCanvasElem(
-    elementColorIcon: Colors.orange,
+    elementColorIcon: Colors.deepOrange[400],
     elementIconSymbol: Icon(
       Icons.assignment_late,
       color: Colors.white,
@@ -26,7 +26,7 @@ List<BacklogCanvasElem> ecList = [
     elementNumberTasks: 6,
   ),
   BacklogCanvasElem(
-    elementColorIcon: Colors.blue[500],
+    elementColorIcon: Colors.blue[200],
     elementIconSymbol: Icon(
       Icons.assignment_turned_in,
       color: Colors.white,
@@ -41,7 +41,7 @@ List<Task> taskList = [
   Task(
     taskName: 'Mobile App',
     taskPriority: EnumPriority.HIGH,
-    taskDescription: 'deserunt ullamco est sit aliqua dolor do amet sint',
+    taskDescription: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint',
     milestone: Date(1, 10, 2020),
   ),
 ];
