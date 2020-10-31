@@ -231,25 +231,16 @@ class TaskInformation extends StatelessWidget {
   String returnStringDate(int d, int m, int y) {
 
     bool lwD = false;
-    bool lwM=false;
-
+    
     if (d < 10) {
       lwD = true;
     }
-    if(m<10){
 
-      lwM =true;
-
-    }
-
-  if(lwD && lwM)
-    return '0$d/0$m/$y';
-  else if(!lwD && lwM)
-    return '$d/0$m/$y';
-  else if(lwD && !lwM)
-    return '0$d/$m/$y';
+  if(lwD)
+    return '0$d ${monthString[m-1]} $y';
   else
-   return '$d/$m/$y';
+    return '$d ${monthString[m-1]} $y';
+
 
   }
 }

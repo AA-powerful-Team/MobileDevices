@@ -3,66 +3,8 @@ import '../Widgets/widgets.dart';
 import 'MainScreenData.dart';
 import 'package:provider/provider.dart';
 
-//Global vars------------------------------------------------------
 
-List<BacklogCanvasElem> ecList = [
-  BacklogCanvasElem(
-    elementColorIcon: Colors.purple,
-    elementIconSymbol: Icon(
-      Icons.assignment,
-      color: Colors.white,
-      size: 25,
-    ),
-    elementStatusname: 'To do',
-    elementNumberTasks: 5,
-  ),
-  BacklogCanvasElem(
-    elementColorIcon: Colors.orange,
-    elementIconSymbol: Icon(
-      Icons.assignment_late,
-      color: Colors.white,
-      size: 25,
-    ),
-    elementStatusname: 'In Progress',
-    elementNumberTasks: 6,
-  ),
-  BacklogCanvasElem(
-    elementColorIcon: Colors.blue[500],
-    elementIconSymbol: Icon(
-      Icons.assignment_turned_in,
-      color: Colors.white,
-      size: 25,
-    ),
-    elementStatusname: 'Done',
-    elementNumberTasks: 25,
-  )
-];
 
-List<Task> taskList = [
-  Task(
-    taskName: 'Mobile App',
-    taskPriority: EnumPriority.HIGH,
-    taskDescription: 'deserunt ullamco est sit aliqua dolor do amet sint',
-    milestone: Date(01, 10, 2020),
-  ),
-];
-
-List<String> titleList=[
-
-'My Task',
-'Recently Assigned',
-
-];
-
-final exampleOne = MainScreenUserData(
-  screenUser: User(
-      userName: 'Jane Copper',
-      userRol: 'Product Manager',
-      userPicPath: 'assets/Devicesavatar.png'),
-   titles: titleList,
-  canvasList: ecList, //canvas backlog list
-  screenTasks: taskList, //Task descripotions list
-);
 
 //---------------------------------------------------------
 
