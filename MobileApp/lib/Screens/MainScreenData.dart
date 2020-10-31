@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 // Widgets DATA---------------------------------------------------------------------------
 enum EnumPriority { HIGH, MID, LOW } //task priority enum
 
+enum EnumTaskType{ALL } //type of tasks
+
 class Date {
   //date limit for task
   int day, month, year;
@@ -17,10 +19,12 @@ class Date {
 
 class MainScreenUserData {
   final User screenUser;
+  final List<String>titles ;//NOTE: could be improve this may be relocated in the future.
   final List<BacklogCanvasElem> canvasList;
   final List<Task> screenTasks;
 
-  MainScreenUserData({this.screenUser, this.canvasList, this.screenTasks});
+
+  MainScreenUserData({this.screenUser,this.titles,this.canvasList, this.screenTasks});
 }
 
 class User {
@@ -42,6 +46,7 @@ class BacklogCanvasElem {
       this.elementIconSymbol,
       this.elementStatusname,
       this.elementNumberTasks});
+      
 }
 
 class Task {

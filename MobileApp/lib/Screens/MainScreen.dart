@@ -3,7 +3,7 @@ import '../Widgets/widgets.dart';
 import 'MainScreenData.dart';
 import 'package:provider/provider.dart';
 
-//Global vars
+//Global vars------------------------------------------------------
 
 List<BacklogCanvasElem> ecList = [
   BacklogCanvasElem(
@@ -47,11 +47,19 @@ List<Task> taskList = [
   ),
 ];
 
+List<String> titleList=[
+
+'My Task',
+'Recently Assigned',
+
+];
+
 final exampleOne = MainScreenUserData(
   screenUser: User(
       userName: 'Jane Copper',
       userRol: 'Product Manager',
       userPicPath: 'assets/Devicesavatar.png'),
+   titles: titleList,
   canvasList: ecList, //canvas backlog list
   screenTasks: taskList, //Task descripotions list
 );
@@ -164,17 +172,17 @@ class Appbar extends StatelessWidget {
           size: 50,
         ),
         Icon(
-          Icons.home,
+          Icons.calendar_view_day_outlined,
           color: Colors.grey,
           size: 50,
         ),
         Icon(
-          Icons.home,
+          Icons.calendar_today_rounded,
           color: Colors.grey,
-          size: 50,
+          size: 40,
         ),
         Icon(
-          Icons.home,
+          Icons.person,
           color: Colors.grey,
           size: 50,
         ),
@@ -186,26 +194,28 @@ class Appbar extends StatelessWidget {
 class LowerSegmentTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+     final MainScreenUserData screenData =
+        Provider.of<MainScreenUserData>(context);
     return Row(
       //Text row type of task
       children: [
         Text(
-          'Recently Assigned', //HARDCODED
+         screenData.titles[1], //HARDCODED
           style: TextStyle(
             fontFamily: 'Roboto',
             fontWeight: FontWeight.w700,
-            fontSize: 30, //HARDCODED
+            fontSize: 30, 
           ),
         ),
-        SizedBox(width: 100), //HARDCODED
+        SizedBox(width: 100), 
         Spacer(),
         Text(
-          'All Tasks',
+          returnStringTaskType(EnumTaskType.ALL),
           style: TextStyle(
             fontFamily: 'Roboto',
-            fontSize: 20,
+            fontSize: 15,
             fontWeight: FontWeight.w300,
-          ), //HARDCODED
+          ), 
         ),
       ],
     );
@@ -286,7 +296,7 @@ class UpperSegmentBGB extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  'My Task', //HARDCODED
+                 screenData.titles[0], //HARDCODED
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontSize: 30, //HARDCODED

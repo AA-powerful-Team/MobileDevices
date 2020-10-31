@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Screens/MainScreenData.dart';
 
+
 class UserInfo extends StatelessWidget {
   final String name;
   final String rol;
@@ -115,6 +116,8 @@ class TaskStatus extends StatelessWidget {
       ),
     );
   }
+
+  
 }
 
 class TaskInformation extends StatelessWidget {
@@ -230,7 +233,11 @@ class TaskInformation extends StatelessWidget {
 
   String returnStringDate(int d, int m, int y) => '$d/$m/$y';
 
-  String returnStringPriority(EnumPriority p) {
+  
+
+}
+
+String returnStringPriority(EnumPriority p) {
     String taskP;
 
     switch (p) {
@@ -251,4 +258,43 @@ class TaskInformation extends StatelessWidget {
 
     return taskP;
   }
-}
+
+String returnStringTaskType(EnumTaskType t){
+
+  String taskT;
+
+    switch (t) {
+      case EnumTaskType.ALL:
+        taskT = 'All Task';
+        break;
+    }
+    return taskT;
+  }
+
+TaskStatus returnBacklogList(MainScreenUserData data, {int i = 0}) {
+    // NOTE:not the best place to locate the funtion but for now will do
+
+    
+    TaskStatus aux;
+
+    if(i<data.canvasList.length){
+
+      aux = TaskStatus(
+       
+        colorIcon: data.canvasList[i].elementColorIcon,
+        iconSymbol: data.canvasList[i].elementIconSymbol,
+        statusname: data.canvasList[i].elementStatusname,
+        numberTasks: data.canvasList[i].elementNumberTasks,
+
+        
+      );
+        
+        returnBacklogList(data,i:++i);
+
+       return aux;
+    
+    }
+
+
+   
+  }
