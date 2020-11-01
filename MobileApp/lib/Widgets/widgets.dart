@@ -44,12 +44,12 @@ class UserInfo extends StatelessWidget {
           Container(
             alignment: Alignment.topRight,
             decoration: BoxDecoration(
-               boxShadow: [
+              boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.3),
                   spreadRadius: 0,
                   blurRadius: 10,
-                  offset: Offset(0,-4), // changes position of shadow
+                  offset: Offset(0, -4), // changes position of shadow
                 ),
               ],
             ),
@@ -169,10 +169,10 @@ class TaskInformation extends StatelessWidget {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
+                  color: Colors.grey.withOpacity(0.2),
                   spreadRadius: 1,
-                  blurRadius: 7,
-                  offset: Offset(0,6), // changes position of shadow
+                  blurRadius: 20,
+                  offset: Offset(0, 6), // changes position of shadow
                 ),
               ],
             ),
@@ -206,7 +206,7 @@ class TaskInformation extends StatelessWidget {
                   height: 15,
                 ),
                 Expanded(
-                    flex: 4,
+                    flex: 3,
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Text(
@@ -218,7 +218,7 @@ class TaskInformation extends StatelessWidget {
                         ),
                       ),
                     )),
-                Divider(height: 20),
+                Divider(height: 25),
                 Expanded(
                   flex: 1,
                   child: Container(
@@ -267,25 +267,41 @@ class Appbar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Icon(
-          Icons.home,
-          color: Colors.grey[400],
-          size: 50,
+        Container(
+          // color square
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(15),
+              bottomLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
+              topLeft: Radius.circular(15),
+            ),
+          ),
+          child: Container(
+            // icon inside the square
+            padding: EdgeInsets.all(5),
+            child: Icon(
+              Icons.home_outlined,
+              color: Colors.black,
+              size: 45,
+            ),
+          ),
         ),
         Icon(
           Icons.calendar_view_day_outlined,
           color: Colors.grey[400],
-          size: 50,
+          size: 45,
         ),
         Icon(
           Icons.calendar_today_rounded,
           color: Colors.grey[400],
-          size: 40,
+          size: 35,
         ),
         Icon(
           Icons.person,
           color: Colors.grey[400],
-          size: 50,
+          size: 45,
         ),
       ],
     );

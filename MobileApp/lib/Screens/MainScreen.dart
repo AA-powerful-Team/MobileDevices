@@ -93,7 +93,7 @@ class _LowerSegmentBGB extends StatelessWidget {
             ),
             SizedBox(height: 15),
             Expanded(
-                flex: 1, // icons bar
+                flex: 2, // icons bar
                 child: Appbar())
           ],
         ),
