@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'Widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   // This widget is the root of your application.
@@ -22,6 +23,7 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(child: Text('${user['name']}')),
+                PreviewPost(),
               ],
             );
           }),
