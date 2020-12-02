@@ -10,12 +10,21 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Genshin Impact Social'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(child: Text('hello')),
-        ],
-      ),
+      body: StreamBuilder(
+          stream:
+              db.collection('users').doc('Il5ociGM5DEzofBhbdYB').snapshots(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return Center(child: CircularProgressIndicator());
+            }
+          final user=snapshot.data; 
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(child: Text('${user['name']}')),
+              ],
+            );
+          }),
     );
   }
 }
