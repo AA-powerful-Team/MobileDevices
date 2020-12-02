@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "77396950560",
+    "firebase_url": "https://gi-social-app.firebaseio.com",
+    "project_id": "gi-social-app",
+    "storage_bucket": "gi-social-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77396950560:android:056d70329c752b1d0b4645",
+        "android_client_info": {
+          "package_name": "com.project.gi_social_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77396950560-f8ggln8r1omjcqajf25u8s0885vbnrjq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDeZOPISiOO5yctoYGMojv0lQ2yTzjtAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77396950560-f8ggln8r1omjcqajf25u8s0885vbnrjq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
