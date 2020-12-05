@@ -1,86 +1,91 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../Data/dataStructures.dart';
+import '../Screens/FullPostScreen.dart';
+
 enum ICONTYPE { ACTIVITY, LVL, TIME, NM_PEOPLE }
 
 class PreviewPost extends StatelessWidget {
   // This widget is the root of your application.
+  PostData data;
 
-  String nickname;
-  String userName;
-  String title;
-  String description;
-
-  String activity;
-  String lvl;
-  String time;
-  String peopleNum;
-
-  PreviewPost({this.nickname, this.userName, this.title, this.description,this.activity,this.lvl,this.time,this.peopleNum});
+  PreviewPost({this.data});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
-      child: Container(
-        padding: EdgeInsets.all(20),
-        width: 375,
-        child: Column(
-          children: [
-            ListTile(
-              contentPadding: EdgeInsets.all(0),
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(
-                    'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'),
+      child: InkWell(
+        splashColor: Colors.blue.withAlpha(30),
+        child: Container(
+          padding: EdgeInsets.all(20),
+          width: 375,
+          child: Column(
+            children: [
+              ListTile(
+                contentPadding: EdgeInsets.all(0),
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                      'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'),
+                ),
+                title: Text(
+                  '${data.nickname}',
+                  style: TextStyle(color: Colors.black, fontSize: 20),
+                ),
+                subtitle: Text(
+                  '@${data.userName}',
+                  style: TextStyle(color: Colors.blue[600]),
+                ),
               ),
-              title: Text(
-                '$nickname',
-                style: TextStyle(color: Colors.black, fontSize: 20),
+              SizedBox(
+                height: 10,
               ),
-              subtitle: Text(
-                '@$userName',
-                style: TextStyle(color: Colors.blue[600]),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text('${data.title}',
+                      style: TextStyle(color: Colors.black, fontSize: 20))),
+              SizedBox(
+                height: 10,
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Align(
-                alignment: Alignment.centerLeft,
-                child: Text('$title', style: TextStyle(color: Colors.black,fontSize: 20))),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              '$description',
-              style: TextStyle(color: Colors.black),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconicDescription(
-                  act: ICONTYPE.ACTIVITY,
-                  textDesc: activity,
-                ),
-                IconicDescription(
-                  act: ICONTYPE.LVL,
-                  textDesc: lvl,
-                ),
-                IconicDescription(
-                  act: ICONTYPE.TIME,
-                  textDesc: time,
-                ),
-                IconicDescription(
-                  act: ICONTYPE.NM_PEOPLE,
-                  textDesc: peopleNum,
-                ),
-              ],
-            ),
-          ],
+              Text(
+                '${data.description}',
+                style: TextStyle(color: Colors.black),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconicDescription(
+                    act: ICONTYPE.ACTIVITY,
+                    textDesc: data.activity,
+                  ),
+                  IconicDescription(
+                    act: ICONTYPE.LVL,
+                    textDesc: '${data.lvl}',
+                  ),
+                  IconicDescription(
+                    act: ICONTYPE.TIME,
+                    textDesc: data.time,
+                  ),
+                  IconicDescription(
+                    act: ICONTYPE.NM_PEOPLE,
+                    textDesc: '${data.peopleNum}',
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
+        onTap: () {
+
+          Navigator.of(context).push(MaterialPageRoute(builder:(_)=> FullPostScreen(fData: data,)));
+
+                  
+
+        },
       ),
     );
   }
