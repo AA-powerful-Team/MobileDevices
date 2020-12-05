@@ -62,15 +62,54 @@ class _FullPostScreenState extends State<FullPostScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                   CircularImage(width:90.0 ,height:90.0 ,imageURL: 'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/Assets%2FImages%2FBosses%2FAndrius.png?alt=media&token=1794595c-2ad3-4cc8-a30d-5925449aa1f2',),
-                   CircularImage(width:90.0 ,height:90.0 ,imageURL: 'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/Assets%2FImages%2FBosses%2FAndrius.png?alt=media&token=1794595c-2ad3-4cc8-a30d-5925449aa1f2',),
-                   CircularImage(width:90.0 ,height:90.0 ,imageURL: 'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/Assets%2FImages%2FBosses%2FAndrius.png?alt=media&token=1794595c-2ad3-4cc8-a30d-5925449aa1f2',)
+                    CircularImage(
+                      width: 90.0,
+                      height: 90.0,
+                      imageURL:
+                          'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/Assets%2FImages%2FBosses%2FAndrius.png?alt=media&token=1794595c-2ad3-4cc8-a30d-5925449aa1f2',
+                    ),
+                    CircularImage(
+                      width: 90.0,
+                      height: 90.0,
+                      imageURL:
+                          'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/Assets%2FImages%2FBosses%2FAndrius.png?alt=media&token=1794595c-2ad3-4cc8-a30d-5925449aa1f2',
+                    ),
+                    CircularImage(
+                      width: 90.0,
+                      height: 90.0,
+                      imageURL:
+                          'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/Assets%2FImages%2FBosses%2FAndrius.png?alt=media&token=1794595c-2ad3-4cc8-a30d-5925449aa1f2',
+                    )
                   ],
                 ),
                 SizedBox(height: 20),
-               Align(
-                  alignment: Alignment.centerLeft,
-                 child: Text('Details',style: TextStyle(color: Colors.black, fontSize: 20))),
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Details',
+                        style: TextStyle(color: Colors.black, fontSize: 20))),
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    CircularImage(
+                      width: 50.0,
+                      height: 50.0,
+                      imageURL:
+                          'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/lvl.png?alt=media&token=99d1e685-f424-48e7-9eef-db8e7d2284e2',
+                      hasDescription: true,
+                      description: '${widget.fData.lvl}',
+                    ),
+                    
+                    CircularImage(
+                      width: 50.0,
+                      height: 50.0,
+                      imageURL:
+                          'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/lvl.png?alt=media&token=99d1e685-f424-48e7-9eef-db8e7d2284e2',
+                      hasDescription: true,
+                      description: '${widget.fData.time}',
+                    ),
+
+                  ],
+                ),
               ],
             ),
           ),

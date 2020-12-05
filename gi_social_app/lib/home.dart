@@ -64,6 +64,8 @@ class HomeScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final post = feed[index];
 
+                             
+
                 return PreviewPost(
                     data: PostData(
                         nickname: '${post['User']}',

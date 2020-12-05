@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primarySwatch: Colors.orange,
         accentColor: Colors.brown,
+        
       ),
       home: HomeScreen(),
     );

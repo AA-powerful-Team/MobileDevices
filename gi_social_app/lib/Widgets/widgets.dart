@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -133,23 +132,51 @@ class IconicDescription extends StatelessWidget {
 }
 
 class CircularImage extends StatelessWidget {
+  final double width, height;
+  final String imageURL;
+  final bool hasDescription;
+  final String description;
 
-  final double width,height;
-  final String imageURL;  
-
-  CircularImage({@required this.width,@required this.height,@required this.imageURL});
+  CircularImage(
+      {@required this.width,
+      @required this.height,
+      @required this.imageURL,
+      this.hasDescription = false,
+      this.description});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle, image: DecorationImage(
-            fit: BoxFit.fill,
-            image: NetworkImage(imageURL),
-          )
+    if (!hasDescription) {
+      return Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              image: NetworkImage(imageURL),
+            )),
+      );
+    } else {
+      return Column(
+        children: [
+          Container(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: NetworkImage(imageURL),
+                )),
           ),
-    );
+       //   SizedBox(height: 5),
+          Text(
+            description,
+            style: TextStyle(fontSize: 20, color: Colors.black),
+          )
+        ],
+      );
+    }
   }
 }
