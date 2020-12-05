@@ -1,3 +1,4 @@
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ enum ICONTYPE { ACTIVITY, LVL, TIME, NM_PEOPLE }
 
 class PreviewPost extends StatelessWidget {
   // This widget is the root of your application.
-  PostData data;
+  final PostData data;
 
   PreviewPost({this.data});
 
@@ -80,11 +81,10 @@ class PreviewPost extends StatelessWidget {
           ),
         ),
         onTap: () {
-
-          Navigator.of(context).push(MaterialPageRoute(builder:(_)=> FullPostScreen(fData: data,)));
-
-                  
-
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => FullPostScreen(
+                    fData: data,
+                  )));
         },
       ),
     );
@@ -128,6 +128,28 @@ class IconicDescription extends StatelessWidget {
           style: TextStyle(color: Colors.grey),
         ),
       ],
+    );
+  }
+}
+
+class CircularImage extends StatelessWidget {
+
+  final double width,height;
+  final String imageURL;  
+
+  CircularImage({@required this.width,@required this.height,@required this.imageURL});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle, image: DecorationImage(
+            fit: BoxFit.fill,
+            image: NetworkImage(imageURL),
+          )
+          ),
     );
   }
 }
