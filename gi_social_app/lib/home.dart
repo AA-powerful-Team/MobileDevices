@@ -5,8 +5,17 @@ import 'Screens/SettingsScreen.dart';
 
 import 'Data/dataStructures.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+
+  final tabs = [];
+
   @override
   Widget build(BuildContext context) {
     final db = FirebaseFirestore.instance;
@@ -52,33 +61,80 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: StreamBuilder(
-          stream: db.collection('feed').snapshots(), 
-          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (!snapshot.hasData) {
-              return Center(child: CircularProgressIndicator());
-            }
-            final feed = snapshot.data.docs;
-            return ListView.builder(
-              itemCount: feed.length,
-              itemBuilder: (context, index) {
-                final post = feed[index];
+      body: HomeTabContent(db: db),
 
-              var reference= post['ByUser'];//this is the reference to the user collection
-
-                 return PreviewPost(
-                    data: PostData(                        
-                        nickname: '',  // this vars should be fill with data from user collection
-                        userName: '',  // this vars should be fill with data from user collection
-                        title: post['Title'],
-                        description: post['Description'],
-                        activity: post['Activity'],
-                        lvl: post['lvl'],
-                        time: post['Time'],
-                        peopleNum: post['NumPers']));
-              },
-            );
-          }),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+            // backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            label: 'Business',
+            // backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'School',
+            // backgroundColor: Colors.black,
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+      ),
+    
     );
+  }
+}
+
+class HomeTabContent extends StatelessWidget {
+  const HomeTabContent({
+    Key key,
+    @required this.db,
+  }) : super(key: key);
+
+  final FirebaseFirestore db;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+        stream: db.collection('feed').snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          }
+          final feed = snapshot.data.docs;
+          return ListView.builder(
+            itemCount: feed.length,
+            itemBuilder: (context, index) {
+              final post = feed[index];
+
+              var reference =
+                  post['ByUser']; //this is the reference to the user collection
+
+              return PreviewPost(
+                  data: PostData(
+                      nickname:
+                          '', // this vars should be fill with data from user collection
+                      userName:
+                          '', // this vars should be fill with data from user collection
+                      title: post['Title'],
+                      description: post['Description'],
+                      activity: post['Activity'],
+                      lvl: post['lvl'],
+                      time: post['Time'],
+                      peopleNum: post['NumPers']));
+            },
+          );
+        });
   }
 }

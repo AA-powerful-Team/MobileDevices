@@ -55,6 +55,10 @@ class _FullPostScreenState extends State<FullPostScreen> {
                   style: TextStyle(color: Colors.black),
                 ),
                 SizedBox(height: 20),
+                Divider(
+                  color: Colors.grey,
+                ),
+                SizedBox(height: 10),
                 Align(
                     alignment: Alignment.centerLeft,
                     child: Text('Activity',
@@ -84,15 +88,17 @@ class _FullPostScreenState extends State<FullPostScreen> {
                   ],
                 ),
                 SizedBox(height: 20),
+                Divider(
+                  color: Colors.grey,
+                ),
+                SizedBox(height: 10),
                 Align(
                     alignment: Alignment.centerLeft,
                     child: Text('Details',
                         style: TextStyle(color: Colors.black, fontSize: 20))),
                 SizedBox(height: 20),
                 Row(
-
-                    mainAxisAlignment: MainAxisAlignment.start,
-
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     CircularImage(
                       width: 50.0,
@@ -101,19 +107,9 @@ class _FullPostScreenState extends State<FullPostScreen> {
                           'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/lvl.png?alt=media&token=99d1e685-f424-48e7-9eef-db8e7d2284e2',
                       hasDescription: true,
                       description: '${widget.fData.lvl}',
-                        fontSize: 15,
+                      fontSize: 15,
                     ),
-                    SizedBox(width:15),
-                    CircularImage(
-                      width: 50.0,
-                      height: 50.0,
-                      imageURL:
-                          'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/lvl.png?alt=media&token=99d1e685-f424-48e7-9eef-db8e7d2284e2',
-                      hasDescription: true,
-                      description:  DateFormat('MM-dd  kk:mm').format(DateTime.parse(widget.fData.time.toDate().toString())),
-                        fontSize: 15,
-                    ),
-                      SizedBox(width:15),
+                    SizedBox(width: 15),
                     CircularImage(
                       width: 50.0,
                       height: 50.0,
@@ -123,7 +119,32 @@ class _FullPostScreenState extends State<FullPostScreen> {
                       description: '${widget.fData.peopleNum}',
                       fontSize: 15,
                     ),
+                    Spacer(),
+                    CircularImage(
+                      width: 50.0,
+                      height: 50.0,
+                      imageURL:
+                          'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/lvl.png?alt=media&token=99d1e685-f424-48e7-9eef-db8e7d2284e2',
+                      hasDescription: true,
+                      description: DateFormat('MM-dd  kk:mm').format(
+                          DateTime.parse(
+                              widget.fData.time.toDate().toString())),
+                      fontSize: 15,
+                    ),
                   ],
+                ),
+                SizedBox(height: 20),
+                Divider(
+                  color: Colors.grey,
+                ),
+                SizedBox(height: 10),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: RaisedButton(
+                    color: Colors.orange,
+                    child: Text('Request to Join'),
+                    onPressed: () {},
+                  ),
                 ),
               ],
             ),
