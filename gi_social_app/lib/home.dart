@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final tabs = [
       HomeTabContent(db: db),
       SettingsScreen(),
+      SettingsScreen(),
     ];
 
     return Scaffold(
@@ -66,6 +67,13 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: tabs[_selectedIndex],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+        
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.amber[800],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         type: BottomNavigationBarType.fixed,
