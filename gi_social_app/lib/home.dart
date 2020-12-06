@@ -14,11 +14,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  final tabs = [];
-
   @override
   Widget build(BuildContext context) {
     final db = FirebaseFirestore.instance;
+
+    final tabs = [
+      HomeTabContent(db: db),
+      SettingsScreen(),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Genshin Impact Social'),
@@ -61,8 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: HomeTabContent(db: db),
-
+      body: tabs[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         type: BottomNavigationBarType.fixed,
@@ -91,7 +94,6 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
       ),
-    
     );
   }
 }
