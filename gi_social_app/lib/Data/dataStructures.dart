@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class PostData {
   String nickname;
   String userName;
@@ -6,7 +8,7 @@ class PostData {
 
   String activity;
   int lvl;
-  String time;
+  Timestamp time;
   int peopleNum;
 
   PostData(

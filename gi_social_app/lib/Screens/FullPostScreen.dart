@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../Data/dataStructures.dart';
 import '../Widgets/widgets.dart';
@@ -89,6 +90,9 @@ class _FullPostScreenState extends State<FullPostScreen> {
                         style: TextStyle(color: Colors.black, fontSize: 20))),
                 SizedBox(height: 20),
                 Row(
+
+                    mainAxisAlignment: MainAxisAlignment.start,
+
                   children: [
                     CircularImage(
                       width: 50.0,
@@ -97,17 +101,28 @@ class _FullPostScreenState extends State<FullPostScreen> {
                           'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/lvl.png?alt=media&token=99d1e685-f424-48e7-9eef-db8e7d2284e2',
                       hasDescription: true,
                       description: '${widget.fData.lvl}',
+                        fontSize: 15,
                     ),
-                    
+                    SizedBox(width:15),
                     CircularImage(
                       width: 50.0,
                       height: 50.0,
                       imageURL:
                           'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/lvl.png?alt=media&token=99d1e685-f424-48e7-9eef-db8e7d2284e2',
                       hasDescription: true,
-                      description: '${widget.fData.time}',
+                      description:  DateFormat('MM-dd  kk:mm').format(DateTime.parse(widget.fData.time.toDate().toString())),
+                        fontSize: 15,
                     ),
-
+                      SizedBox(width:15),
+                    CircularImage(
+                      width: 50.0,
+                      height: 50.0,
+                      imageURL:
+                          'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/lvl.png?alt=media&token=99d1e685-f424-48e7-9eef-db8e7d2284e2',
+                      hasDescription: true,
+                      description: '${widget.fData.peopleNum}',
+                      fontSize: 15,
+                    ),
                   ],
                 ),
               ],

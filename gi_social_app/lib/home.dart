@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: StreamBuilder(
-          stream: db.collection('feed').snapshots(),
+          stream: db.collection('feed').snapshots(), 
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
               return Center(child: CircularProgressIndicator());
@@ -64,17 +64,17 @@ class HomeScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final post = feed[index];
 
-                             
+              var reference= post['ByUser'];//this is the reference to the user collection
 
-                return PreviewPost(
-                    data: PostData(
-                        nickname: '${post['User']}',
-                        userName: 'IwillhaveOrderblabla',
-                        title: '${post['Title']}',
-                        description: '${post['Description']}',
-                        activity: '${post['Activity']}',
+                 return PreviewPost(
+                    data: PostData(                        
+                        nickname: '',  // this vars should be fill with data from user collection
+                        userName: '',  // this vars should be fill with data from user collection
+                        title: post['Title'],
+                        description: post['Description'],
+                        activity: post['Activity'],
                         lvl: post['lvl'],
-                        time: '4:00',
+                        time: post['Time'],
                         peopleNum: post['NumPers']));
               },
             );

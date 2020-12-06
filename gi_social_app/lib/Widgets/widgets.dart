@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../Data/dataStructures.dart';
 import '../Screens/FullPostScreen.dart';
@@ -68,7 +69,7 @@ class PreviewPost extends StatelessWidget {
                   ),
                   IconicDescription(
                     act: ICONTYPE.TIME,
-                    textDesc: data.time,
+                    textDesc: DateFormat('MM-dd  kk:mm').format(DateTime.parse(data.time.toDate().toString())),
                   ),
                   IconicDescription(
                     act: ICONTYPE.NM_PEOPLE,
@@ -134,15 +135,16 @@ class IconicDescription extends StatelessWidget {
 class CircularImage extends StatelessWidget {
   final double width, height;
   final String imageURL;
+
   final bool hasDescription;
   final String description;
-
+  final double fontSize;
   CircularImage(
       {@required this.width,
       @required this.height,
       @required this.imageURL,
       this.hasDescription = false,
-      this.description});
+      this.description,this.fontSize=20});
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +175,7 @@ class CircularImage extends StatelessWidget {
        //   SizedBox(height: 5),
           Text(
             description,
-            style: TextStyle(fontSize: 20, color: Colors.black),
+            style: TextStyle(fontSize: fontSize, color: Colors.black),
           )
         ],
       );
