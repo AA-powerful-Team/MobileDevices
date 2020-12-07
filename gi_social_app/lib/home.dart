@@ -126,7 +126,9 @@ class _HomeTabContentState extends State<HomeTabContent> {
             itemBuilder: (context, index) {
               final post = feed[index];
 
-              var refDoc = db.collection('users').doc('Il5ociGM5DEzofBhbdYB').get();
+              DocumentReference ref=post['ByUser'];
+              String idDoc=ref.path.substring(6);
+              var refDoc = db.collection('users').doc('$idDoc').get();
 
              return Container(
                child: FutureBuilder(
