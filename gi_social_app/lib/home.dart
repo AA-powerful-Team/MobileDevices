@@ -5,6 +5,8 @@ import 'Screens/SettingsScreen.dart';
 
 import 'Data/dataStructures.dart';
 
+final db = FirebaseFirestore.instance;
+
 class HomeScreen extends StatefulWidget {
   // This widget is the root of your application.
   @override
@@ -16,10 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final db = FirebaseFirestore.instance;
-
     final tabs = [
-      HomeTabContent(db: db),
+      HomeTabContent(),
       SettingsScreen(),
       SettingsScreen(),
     ];
@@ -68,9 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: tabs[_selectedIndex],
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-        
-        },
+        onPressed: () {},
         child: Icon(Icons.add),
         backgroundColor: Colors.amber[800],
       ),
@@ -106,13 +104,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class HomeTabContent extends StatelessWidget {
-  const HomeTabContent({
-    Key key,
-    @required this.db,
-  }) : super(key: key);
+class HomeTabContent extends StatefulWidget {
+  @override
+  _HomeTabContentState createState() => _HomeTabContentState();
+}
 
-  final FirebaseFirestore db;
+class _HomeTabContentState extends State<HomeTabContent> {
+  dynamic data;
 
   @override
   Widget build(BuildContext context) {
@@ -128,21 +126,25 @@ class HomeTabContent extends StatelessWidget {
             itemBuilder: (context, index) {
               final post = feed[index];
 
-              var reference =
-                  post['ByUser']; //this is the reference to the user collection
-
-              return PreviewPost(
-                  data: PostData(
-                      nickname:
-                          '', // this vars should be fill with data from user collection
-                      userName:
-                          '', // this vars should be fill with data from user collection
-                      title: post['Title'],
-                      description: post['Description'],
-                      activity: post['Activity'],
-                      lvl: post['lvl'],
-                      time: post['Time'],
-                      peopleNum: post['NumPers']));
+             return StreamBuilder(
+                  stream: db
+                      .collection('user')
+                      .doc('${post['ByUser']}')
+                      .snapshots(),
+                  builder: (context2, snapshot2) {
+                    var udata = snapshot2.data;
+                    return PreviewPost(
+                        data: PostData(
+                            // this vars should be fill with data from user collection
+                            userName://CRASH HERE
+                                '', // this vars should be fill with data from user collection
+                            title: post['Title'],
+                            description: post['Description'],
+                            activity: post['Activity'],
+                            lvl: post['lvl'],
+                            time: post['Time'],
+                            peopleNum: post['NumPers']));
+                  });
             },
           );
         });
