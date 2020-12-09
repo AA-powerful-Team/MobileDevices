@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               "Activity":"MaterialFarming",
               "ByUser": db.collection('users').doc('Il5ociGM5DEzofBhbdYB'),
-              "Decription":"Want to farm some materials to increase character talents",
+              "Description":"Want to farm some materials to increase character talents",
               "NumPers": 2,
               "Time":Timestamp.fromDate(DateTime(2020,2,24)),
               "Title":"Farming",
