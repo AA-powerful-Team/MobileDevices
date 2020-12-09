@@ -68,7 +68,31 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: tabs[_selectedIndex],
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+
+
+         
+          Timestamp testTime=Timestamp.now();
+          setState(() {
+            
+            
+            db.collection('feed').add({
+
+              "Activity":"MaterialFarming",
+              "ByUser": db.collection('users').doc('Il5ociGM5DEzofBhbdYB'),
+              "Decription":"Want to farm some materials to increase character talents",
+              "NumPers": 2,
+              "Time":Timestamp.fromDate(DateTime(2020,2,24)),
+              "Title":"Farming",
+              "lvl":50,
+
+            });
+
+
+
+          });
+
+        },
         child: Icon(Icons.add),
         backgroundColor: Colors.amber[800],
       ),
