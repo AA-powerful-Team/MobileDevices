@@ -7,7 +7,7 @@ class CreatePost extends StatefulWidget {
 
 class _CreatePostState extends State<CreatePost> {
   TextEditingController _controllerTitle;
-   TextEditingController _controllerDescription;
+  TextEditingController _controllerDescription;
   String _titleText;
   String _descriptionText;
 
@@ -30,14 +30,12 @@ class _CreatePostState extends State<CreatePost> {
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
-              child: Container(
+        child: Container(
           color: Colors.white,
           padding: EdgeInsets.all(25),
           child: Column(
-          
             children: [
               TextField(
-               
                 decoration: InputDecoration(
                   hintText: "your Activity title",
                   hintStyle: TextStyle(color: Colors.grey[800]),
@@ -62,14 +60,11 @@ class _CreatePostState extends State<CreatePost> {
                 height: 20,
               ),
               TextField(
-            
-                decoration: InputDecoration( 
-
+                decoration: InputDecoration(
                   hintText: "your description",
                   hintStyle: TextStyle(color: Colors.grey[800]),
                   labelText: "Description",
                   labelStyle: TextStyle(
-                    
                     fontSize: 24,
                     color: Colors.black,
                   ),
@@ -77,14 +72,62 @@ class _CreatePostState extends State<CreatePost> {
                   filled: true,
                   border: OutlineInputBorder(),
                 ),
-                maxLines: 15,
+                maxLines: 10,
                 controller: _controllerDescription,
                 onSubmitted: (String _) {
                   setState(() {
                     _titleText = _controllerDescription.text;
                   });
                 },
-              )
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Divider(
+                color: Colors.black,
+              ),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Activity focus',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 25,
+                    ),
+                  )),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Material(
+                    color: Colors.white,
+                    child: Center(
+                      child: Ink(
+                        decoration: const ShapeDecoration(
+                          color: Colors.grey,
+                          shape: CircleBorder(),
+                        ),
+                        child: IconButton(
+                          icon: Icon(Icons.add),
+        
+                          color: Colors.white,
+                          onPressed: () {},
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Divider(),
+              SizedBox(height: 10,),
+              Row(
+                children: [
+
+                ],
+              ),
+
+              RaisedButton(),
             ],
           ),
         ),
