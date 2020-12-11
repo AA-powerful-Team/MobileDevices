@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gi_social_app/Screens/CreatePost.dart';
 import 'Widgets/widgets.dart';
 import 'Screens/SettingsScreen.dart';
 
@@ -71,7 +72,13 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
 
 
-         
+          Navigator.of(context).push(MaterialPageRoute(
+
+            builder: (BuildContext context)=> CreatePost()
+          ));
+
+
+         /*
           Timestamp testTime=Timestamp.now();
           setState(() {
             
@@ -91,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
           });
-
+*/
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.amber[800],
