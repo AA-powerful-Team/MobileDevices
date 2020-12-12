@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../Widgets/widgets.dart';
 
 class CreatePost extends StatefulWidget {
   @override
@@ -100,23 +101,7 @@ class _CreatePostState extends State<CreatePost> {
               ),
               Row(
                 children: [
-                  Material(
-                    color: Colors.white,
-                    child: Center(
-                      child: Ink(
-                        decoration: const ShapeDecoration(
-                          color: Colors.grey,
-                          shape: CircleBorder(),
-                        ),
-                        child: IconButton(
-                          icon: Icon(Icons.add),
-        
-                          color: Colors.white,
-                          onPressed: () {},
-                        ),
-                      ),
-                    ),
-                  )
+                  AddImageActivity()
                 ],
               ),
               Divider(),
@@ -124,10 +109,11 @@ class _CreatePostState extends State<CreatePost> {
               Row(
                 children: [
 
+
                 ],
               ),
 
-              RaisedButton(),
+           
             ],
           ),
         ),
@@ -135,3 +121,5 @@ class _CreatePostState extends State<CreatePost> {
     );
   }
 }
+
+

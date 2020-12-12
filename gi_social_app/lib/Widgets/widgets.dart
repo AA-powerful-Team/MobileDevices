@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../Data/dataStructures.dart';
 import '../Screens/FullPostScreen.dart';
+import '../Screens/ActivityFocusScreen.dart';
 
 enum ICONTYPE { ACTIVITY, LVL, TIME, NM_PEOPLE }
 
@@ -69,7 +70,8 @@ class PreviewPost extends StatelessWidget {
                   ),
                   IconicDescription(
                     act: ICONTYPE.TIME,
-                    textDesc: DateFormat('MM-dd  kk:mm').format(DateTime.parse(data.time.toDate().toString())),
+                    textDesc: DateFormat('MM-dd  kk:mm')
+                        .format(DateTime.parse(data.time.toDate().toString())),
                   ),
                   IconicDescription(
                     act: ICONTYPE.NM_PEOPLE,
@@ -132,6 +134,64 @@ class IconicDescription extends StatelessWidget {
   }
 }
 
+class AddImageActivity extends StatefulWidget {
+  String imagePath;
+  bool hasImage;
+  AddImageActivity({this.imagePath, this.hasImage = false});
+
+  @override
+  _AddImageActivityState createState() => _AddImageActivityState();
+}
+
+class _AddImageActivityState extends State<AddImageActivity> {
+  @override
+  Widget build(BuildContext context) {
+    if (widget.hasImage == false) {
+      return Material(
+        color: Colors.white,
+        child: Center(
+          child: Ink(
+            decoration: const ShapeDecoration(
+              color: Colors.grey,
+              shape: CircleBorder(),
+            ),
+            child: IconButton(
+              icon: Icon(Icons.add),
+              color: Colors.white,
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(
+                        builder: (context) => ActivityFocusScreen()))
+                    .then((value) {
+                  setState(() {
+                    widget.imagePath = value;
+                    widget.hasImage = true;
+                  });
+                });
+              },
+            ),
+          ),
+        ),
+      );
+    } else {
+      return GestureDetector(
+        onLongPress: () {
+          setState(() {
+
+            widget.hasImage = false;
+            widget.imagePath = null;
+          });
+        },
+        child: CircularImage(
+          width: 90.0,
+          height: 90.0,
+          imageURL: widget.imagePath,
+        ),
+      );
+    }
+  }
+}
+
 class CircularImage extends StatelessWidget {
   final double width, height;
   final String imageURL;
@@ -144,7 +204,8 @@ class CircularImage extends StatelessWidget {
       @required this.height,
       @required this.imageURL,
       this.hasDescription = false,
-      this.description,this.fontSize=20});
+      this.description,
+      this.fontSize = 20});
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +233,7 @@ class CircularImage extends StatelessWidget {
                   image: NetworkImage(imageURL),
                 )),
           ),
-       //   SizedBox(height: 5),
+          //   SizedBox(height: 5),
           Text(
             description,
             style: TextStyle(fontSize: fontSize, color: Colors.black),
