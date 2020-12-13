@@ -163,10 +163,12 @@ class _AddImageActivityState extends State<AddImageActivity> {
                     .push(MaterialPageRoute(
                         builder: (context) => ActivityFocusScreen()))
                     .then((value) {
-                  setState(() {
-                    widget.imagePath = value;
-                    widget.hasImage = true;
-                  });
+                  if (value != null){
+                    setState(() {
+                      widget.imagePath = value;
+                      widget.hasImage = true;
+                    });
+                  }
                 });
               },
             ),
@@ -177,14 +179,13 @@ class _AddImageActivityState extends State<AddImageActivity> {
       return GestureDetector(
         onLongPress: () {
           setState(() {
-
             widget.hasImage = false;
             widget.imagePath = null;
           });
         },
         child: CircularImage(
-          width: 90.0,
-          height: 90.0,
+          width: 70.0,
+          height: 70.0,
           imageURL: widget.imagePath,
         ),
       );
