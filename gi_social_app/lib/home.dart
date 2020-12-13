@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gi_social_app/Screens/CreatePost.dart';
 import 'Widgets/widgets.dart';
 import 'Screens/SettingsScreen.dart';
-
+import 'Screens/EditProfile.dart';
 import 'Data/dataStructures.dart';
 
 final db = FirebaseFirestore.instance;
@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final tabs = [
       HomeTabContent(),
-      SettingsScreen(),
+      editProfile(),
       SettingsScreen(),
     ];
 
@@ -70,15 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
       body: tabs[_selectedIndex],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-
-
           Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => CreatePost()));
 
-            builder: (BuildContext context)=> CreatePost()
-          ));
-
-
-         /*
+          /*
           Timestamp testTime=Timestamp.now();
           setState(() {
             
@@ -157,22 +152,22 @@ class _HomeTabContentState extends State<HomeTabContent> {
             itemBuilder: (context, index) {
               final post = feed[index];
 
-              DocumentReference ref=post['ByUser'];
-              String idDoc=ref.path.substring(6);
+              DocumentReference ref = post['ByUser'];
+              String idDoc = ref.path.substring(6);
               var refDoc = db.collection('users').doc('$idDoc').get();
 
-             return Container(
-               child: FutureBuilder(
+              return Container(
+                child: FutureBuilder(
                   future: refDoc,
                   builder: (context2, snapshot2) {
                     if (snapshot2.connectionState == ConnectionState.done) {
-                      var a=snapshot2.data;
-                     
+                      var a = snapshot2.data;
+
                       return PreviewPost(
                           data: PostData(
                               // this vars should be fill with data from user collection
                               nickname: //CRASH HERE
-                               a['Nickname'], // this vars should be fill with data from user collection
+                                  a['Nickname'], // this vars should be fill with data from user collection
                               title: post['Title'],
                               description: post['Description'],
                               activity: post['Activity'],
@@ -184,7 +179,7 @@ class _HomeTabContentState extends State<HomeTabContent> {
                     }
                   },
                 ),
-             );
+              );
             },
           );
         });
