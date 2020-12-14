@@ -21,6 +21,13 @@ class _CreatePostState extends State<CreatePost> {
   String numPeop;
   String time;
 
+  List<AddImageActivity> aux = [
+    AddImageActivity(),
+    AddImageActivity(),
+    AddImageActivity(),
+    AddImageActivity(),
+  ];
+
   @override
   void initState() {
     _controllerTitle = TextEditingController(text: _titleText);
@@ -65,7 +72,7 @@ class _CreatePostState extends State<CreatePost> {
                 ),
                 maxLines: 1,
                 controller: _controllerTitle,
-                onSubmitted: (String _) {
+                onChanged: (String _) {//Note: i think on submitted would be more optimal but then if the button is not pressed value = null
                   setState(() {
                     _titleText = _controllerTitle.text;
                   });
@@ -89,9 +96,9 @@ class _CreatePostState extends State<CreatePost> {
                 ),
                 maxLines: 10,
                 controller: _controllerDescription,
-                onSubmitted: (String _) {
+                onChanged: (String _) {
                   setState(() {
-                    _titleText = _controllerDescription.text;
+                    _descriptionText = _controllerDescription.text;
                   });
                 },
               ),
@@ -115,12 +122,7 @@ class _CreatePostState extends State<CreatePost> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  AddImageActivity(),
-                  AddImageActivity(),
-                  AddImageActivity(),
-                  AddImageActivity(),
-                ],
+                children: [aux[0], aux[1], aux[2], aux[3]],
               ),
               Divider(),
               SizedBox(
@@ -146,7 +148,7 @@ class _CreatePostState extends State<CreatePost> {
                       maxLength: 2,
                       keyboardType: TextInputType.number,
                       controller: _controllerLvl,
-                      onSubmitted: (String _) {
+                      onChanged: (String _) {
                         setState(() {
                           lvl = _controllerLvl.text;
                         });
@@ -174,7 +176,7 @@ class _CreatePostState extends State<CreatePost> {
                       maxLength: 3,
                       keyboardType: TextInputType.number,
                       controller: _controllerPeoplNum,
-                      onSubmitted: (String _) {
+                      onChanged: (String _) {
                         setState(() {
                           numPeop = _controllerPeoplNum.text;
                         });
@@ -198,7 +200,7 @@ class _CreatePostState extends State<CreatePost> {
                 ),
                 maxLength: 5,
                 controller: _controllerTime,
-                onSubmitted: (String _) {
+               onChanged: (String _) {
                   setState(() {
                     time = _controllerTime.text;
                   });
@@ -211,22 +213,31 @@ class _CreatePostState extends State<CreatePost> {
                 child: Text('Post'),
                 color: Colors.orange[800],
                 onPressed: () {
-
                   //To be sure there is content in the textfield I think it should be changed to Textformfield
 
-                  int auxLvl=int.parse(lvl);
-                  int auxNumP=int.parse(numPeop);
+                  int auxLvl = int.parse(lvl);
+                  int auxNumP = int.parse(numPeop);
+                  List<String> images = [
+                    aux[0].imagePath,
+                    aux[1].imagePath,
+                    aux[2].imagePath,
+                    aux[3].imagePath,
+                  ];
 
                   setState(() {
+
+                
                     db.collection('feed').add({
                       "Activity": _titleText,
                       "ByUser":
                           db.collection('users').doc('Il5ociGM5DEzofBhbdYB'),
                       "Description": _descriptionText,
                       "NumPers": auxNumP,
-                      "Time": Timestamp.fromDate(DateTime(2020, 2, 24)),//Change in the future
+                      "Time": Timestamp.fromDate(
+                          DateTime(2020, 2, 24)), //Change in the future
                       "Title": _titleText,
                       "lvl": auxLvl,
+                      "ActvityImages": images,
                     });
                     Navigator.of(context).pop();
                   });

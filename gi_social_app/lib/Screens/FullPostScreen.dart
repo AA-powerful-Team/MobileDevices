@@ -13,8 +13,25 @@ class FullPostScreen extends StatefulWidget {
 }
 
 class _FullPostScreenState extends State<FullPostScreen> {
+  List<Widget> activityImages=[];
+
   @override
   Widget build(BuildContext context) {
+
+    for (int i = 0; i < widget.fData.imagesPath.length; ++i) {
+
+      if (widget.fData.imagesPath[i] == null)
+        widget.fData.imagesPath.removeAt(i);
+      else
+        activityImages.add(
+          CircularImage(
+            width: 70.0,
+            height: 70.0,
+            imageURL: widget.fData.imagesPath[i],
+          ),
+        );
+    }
+
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -66,26 +83,7 @@ class _FullPostScreenState extends State<FullPostScreen> {
                 SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CircularImage(
-                      width: 90.0,
-                      height: 90.0,
-                      imageURL:
-                          'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/Assets%2FImages%2FBosses%2FAndrius.png?alt=media&token=1794595c-2ad3-4cc8-a30d-5925449aa1f2',
-                    ),
-                    CircularImage(
-                      width: 90.0,
-                      height: 90.0,
-                      imageURL:
-                          'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/Assets%2FImages%2FBosses%2FAndrius.png?alt=media&token=1794595c-2ad3-4cc8-a30d-5925449aa1f2',
-                    ),
-                    CircularImage(
-                      width: 90.0,
-                      height: 90.0,
-                      imageURL:
-                          'https://firebasestorage.googleapis.com/v0/b/gi-social-app.appspot.com/o/Assets%2FImages%2FBosses%2FAndrius.png?alt=media&token=1794595c-2ad3-4cc8-a30d-5925449aa1f2',
-                    )
-                  ],
+                  children: activityImages,
                 ),
                 SizedBox(height: 20),
                 Divider(

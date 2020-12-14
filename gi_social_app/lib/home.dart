@@ -171,6 +171,7 @@ class _HomeTabContentState extends State<HomeTabContent> {
                               title: post['Title'],
                               description: post['Description'],
                               activity: post['Activity'],
+                             imagesPath: post['ActvityImages'],               
                               lvl: post['lvl'],
                               time: post['Time'],
                               peopleNum: post['NumPers']));

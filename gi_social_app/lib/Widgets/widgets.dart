@@ -11,11 +11,12 @@ enum ICONTYPE { ACTIVITY, LVL, TIME, NM_PEOPLE }
 class PreviewPost extends StatelessWidget {
   // This widget is the root of your application.
   final PostData data;
-
   PreviewPost({this.data});
 
   @override
   Widget build(BuildContext context) {
+
+ 
     return Card(
       color: Colors.white,
       child: InkWell(
@@ -135,9 +136,18 @@ class IconicDescription extends StatelessWidget {
 }
 
 class AddImageActivity extends StatefulWidget {
+  
   String imagePath;
   bool hasImage;
-  AddImageActivity({this.imagePath, this.hasImage = false});
+  AddImageActivity({this.imagePath, this.hasImage = false,});
+
+  
+  String get getImage {
+    if (hasImage) {
+      return imagePath;
+    } else
+      return null;
+  }
 
   @override
   _AddImageActivityState createState() => _AddImageActivityState();
@@ -163,9 +173,10 @@ class _AddImageActivityState extends State<AddImageActivity> {
                     .push(MaterialPageRoute(
                         builder: (context) => ActivityFocusScreen()))
                     .then((value) {
-                  if (value != null){
+                  if (value != null) {
                     setState(() {
                       widget.imagePath = value;
+                     
                       widget.hasImage = true;
                     });
                   }
