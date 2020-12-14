@@ -223,10 +223,7 @@ class _CreatePostState extends State<CreatePost> {
                     aux[2].imagePath,
                     aux[3].imagePath,
                   ];
-
-                  setState(() {
-
-                
+                  setState(() {         
                     db.collection('feed').add({
                       "Activity": _titleText,
                       "ByUser":

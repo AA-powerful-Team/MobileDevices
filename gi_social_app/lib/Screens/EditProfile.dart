@@ -11,9 +11,9 @@ class _editProfileState extends State<editProfile> {
   TextEditingController controllerUser;
   TextEditingController controllerEmail;
 
-  String _descriptionText = 'description';
-  String _descriptionUser = 'Username';
-  String _descriptionEmail = 'Email';
+  String _descriptionText;
+  String _descriptionUser;
+  String _descriptionEmail;
 
   @override
   void initState() {
@@ -32,160 +32,129 @@ class _editProfileState extends State<editProfile> {
   }
 
   Widget build(BuildContext context) {
-    return Container(
-      child: Container(
-        padding: EdgeInsets.only(right: 15, left: 15),
-        child: Column(
-          children: [
-            Center(
-                child: Text('Edit Profile',
-                    style: TextStyle(fontSize: 50, color: Colors.white))),
-
-            Container(
-              //padding:
-              //    EdgeInsets.only(right: 10, left: 10, bottom: 30, top: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                //profile email, user and pic
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(25),
+            child: Column(children: [
+              Row(
                 children: [
                   Column(
-                    //email and user
                     children: [
                       Container(
-                        alignment: Alignment.centerRight,
-                        height: 30,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(3),
-                        ),
+                        width: 180,
+                        height: 50,
                         child: TextField(
                           controller: controllerUser,
-                          onSubmitted: (String _) {
-                            setState(() {
-                              _descriptionUser = controllerUser.text;
-                            });
-                          },
+                          decoration: InputDecoration(
+                            hintText: "ex:Zadoras",
+                            hintStyle: TextStyle(color: Colors.grey[800]),
+                            labelText: "UserName",
+                            labelStyle: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                            ),
+                            fillColor: Colors.grey[200],
+                            filled: true,
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (String _) {},
                         ),
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 15,
                       ),
                       Container(
-                        alignment: Alignment.centerRight,
-                        height: 30,
-                        width: 150,
-                        padding: EdgeInsets.only(right: 5, left: 5),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(3),
-                        ),
+                        width: 180,
+                        height: 50,
                         child: TextField(
                           controller: controllerEmail,
-                          onSubmitted: (String _) {
-                            setState(() {
-                              _descriptionEmail = controllerEmail.text;
-                            });
-                          },
+                          decoration: InputDecoration(
+                            hintText: "ex:example@gmail.com",
+                            hintStyle: TextStyle(color: Colors.grey[800]),
+                            labelText: "Email",
+                            labelStyle: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                            ),
+                            fillColor: Colors.grey[200],
+                            filled: true,
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (String _) {},
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    width: 20,
+                  Spacer(),
+                  Column(
+                    children: [
+                      CircularImage(
+                        width: 100,
+                        height: 100,
+                        imageURL:
+                            'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+                      ),
+                      ButtonTheme(
+                        minWidth: 50,
+                        height: 10.0,
+                        child: RaisedButton(
+                          onPressed: () {},
+                          child: Text("Edit"),
+                        ),
+                      ),
+                    ],
                   ),
-                  Column(//profile pic
-                      children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Container(
-                          width: 150.0,
-                          height: 150.0,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                          )),
-                    ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text('edit',
-                          style: TextStyle(fontSize: 25, color: Colors.white)),
-                    ),
-                  ]),
                 ],
               ),
-            ),
-            Text('About you',
-                style: TextStyle(fontSize: 20, color: Colors.white)),
-            Row(
-              children: [
-                Container(
-                  width: 340,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextField(
-                        controller: controllerDescription,
-                        decoration: InputDecoration(
-                          hintText: "your description",
-                          hintStyle: TextStyle(color: Colors.grey[800]),
-                          labelText: "Description",
-                          labelStyle: TextStyle(
-                            fontSize: 24,
-                            color: Colors.black,
-                          ),
-                          fillColor: Colors.grey[200],
-                          filled: true,
-                          border: OutlineInputBorder(),
-                        ),
-                        maxLines: 8,
-                        onSubmitted: (String _) {
-                          setState(() {
-                            _descriptionText = controllerDescription.text;
-                          });
-                        },
-                      ),
-                    ],
+              TextField(
+                controller: controllerDescription,
+                decoration: InputDecoration(
+                  hintStyle: TextStyle(color: Colors.grey[800]),
+                  labelText: "Description",
+                  labelStyle: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
                   ),
-                )
-              ],
-            ), // description
-
-            Text('Characters',
-                style: TextStyle(fontSize: 20, color: Colors.white)),
-            Container(
-              color: Colors.white,
-            ),
-            Row(
-              children: [
-                AddImageActivity(),
-                AddImageActivity(),
-                AddImageActivity(),
-                AddImageActivity(),
-              ],
-            ),
-
-            //group info
-            Row(
-              children: [
-                RaisedButton(
-                  child: Text('Cancel'),
-                  onPressed: () {
-                    //Navigator.of(context).pop();
-                  },
+                  fillColor: Colors.grey[200],
+                  filled: true,
+                  border: OutlineInputBorder(),
                 ),
-                Spacer(),
-                RaisedButton(
-                  child: Text('Confirm'),
-                  onPressed: () {
-                    //update values in firebase
-                    //Navigator.of(context).pop();
-                  },
-                )
-              ],
-            ) //buttons cancel confirm
-          ],
-        ),
+                maxLines: 8,
+                onChanged: (String _) {
+                  _descriptionText = controllerDescription.text;
+                },
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  AddImageActivity(),
+                  AddImageActivity(),
+                  AddImageActivity(),
+                  AddImageActivity(),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Row(
+                children: [
+                  RaisedButton(
+                    child: Text('Saved'),
+                    onPressed: () {},
+                  ),
+                  Spacer(),
+                  RaisedButton(
+                    child: Text('Cancel'),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ])),
       ),
     );
   }
