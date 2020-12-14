@@ -8,7 +8,6 @@ class CreatePost extends StatefulWidget {
 }
 
 class _CreatePostState extends State<CreatePost> {
-  
   final db = FirebaseFirestore.instance;
 
   TextEditingController _controllerTitle;
@@ -161,7 +160,7 @@ class _CreatePostState extends State<CreatePost> {
                     width: 170,
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: "ex: 1-3",
+                        hintText: "ex: 3",
                         hintStyle: TextStyle(color: Colors.grey[800]),
                         labelText: "Num. of Players",
                         labelStyle: TextStyle(
@@ -212,21 +211,24 @@ class _CreatePostState extends State<CreatePost> {
                 child: Text('Post'),
                 color: Colors.orange[800],
                 onPressed: () {
+
+                  //To be sure there is content in the textfield I think it should be changed to Textformfield
+
+                  int auxLvl=int.parse(lvl);
+                  int auxNumP=int.parse(numPeop);
+
                   setState(() {
-
                     db.collection('feed').add({
-
-                      "Activity": "MaterialFarming",
+                      "Activity": _titleText,
                       "ByUser":
                           db.collection('users').doc('Il5ociGM5DEzofBhbdYB'),
-                      "Description":
-                          "Want to farm some materials to increase character talents",
-                      "NumPers": 2,
-                      "Time": Timestamp.fromDate(DateTime(2020, 2, 24)),
-                      "Title": "Farming",
-                      "lvl": 50,
-                      
+                      "Description": _descriptionText,
+                      "NumPers": auxNumP,
+                      "Time": Timestamp.fromDate(DateTime(2020, 2, 24)),//Change in the future
+                      "Title": _titleText,
+                      "lvl": auxLvl,
                     });
+                    Navigator.of(context).pop();
                   });
                 },
               ),
