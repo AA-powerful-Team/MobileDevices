@@ -12,17 +12,19 @@ class FullPostScreen extends StatefulWidget {
   _FullPostScreenState createState() => _FullPostScreenState();
 }
 
+
+
+
 class _FullPostScreenState extends State<FullPostScreen> {
   List<Widget> activityImages=[];
 
-  @override
-  Widget build(BuildContext context) {
+  
+  void filLActivityImage() {
 
     for (int i = 0; i < widget.fData.imagesPath.length; ++i) {
-
-      if (widget.fData.imagesPath[i] == null)
+      if (widget.fData.imagesPath[i] == null) {
         widget.fData.imagesPath.removeAt(i);
-      else
+      } else {
         activityImages.add(
           CircularImage(
             width: 70.0,
@@ -30,7 +32,19 @@ class _FullPostScreenState extends State<FullPostScreen> {
             imageURL: widget.fData.imagesPath[i],
           ),
         );
+      }
     }
+  }
+
+  @override
+  void initState() {
+    
+    filLActivityImage();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(),

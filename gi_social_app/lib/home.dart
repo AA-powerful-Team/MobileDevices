@@ -164,7 +164,7 @@ class _HomeTabContentState extends State<HomeTabContent> {
                       var a = snapshot2.data;
 
                       return PreviewPost(
-                          data: PostData(
+                          fData: PostData(
                               // this vars should be fill with data from user collection
                               nickname: //CRASH HERE
                                   a['Nickname'], // this vars should be fill with data from user collection
