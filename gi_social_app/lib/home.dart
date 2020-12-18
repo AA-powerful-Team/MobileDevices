@@ -167,7 +167,8 @@ class _HomeTabContentState extends State<HomeTabContent> {
                           fData: PostData(
                               // this vars should be fill with data from user collection
                               nickname: //CRASH HERE
-                                  a['Nickname'], // this vars should be fill with data from user collection
+                                  a['Nickname'],
+                                  userName: a['UserName'], // this vars should be fill with data from user collection
                               title: post['Title'],
                               description: post['Description'],
                               activity: post['Activity'],
