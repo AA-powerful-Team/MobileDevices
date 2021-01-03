@@ -26,7 +26,8 @@ class PostData {
 }
 
 class UserData {
-  int id;
+  String id;
   String nickname;
   String address;
+  List friends;
 }

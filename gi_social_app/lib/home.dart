@@ -7,6 +7,7 @@ import 'Screens/EditProfile.dart';
 import 'Data/dataStructures.dart';
 
 final db = FirebaseFirestore.instance;
+UserData thisUser;
 
 class HomeScreen extends StatefulWidget {
   // This widget is the root of your application.
@@ -18,11 +19,17 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final tabs = [
       HomeTabContent(),
       editProfile(),
-      SettingsScreen(),
+      FriendsTabContent(),
     ];
 
     return Scaffold(
@@ -72,28 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => CreatePost()));
-
-          /*
-          Timestamp testTime=Timestamp.now();
-          setState(() {
-            
-            
-            db.collection('feed').add({
-
-              "Activity":"MaterialFarming",
-              "ByUser": db.collection('users').doc('Il5ociGM5DEzofBhbdYB'),
-              "Description":"Want to farm some materials to increase character talents",
-              "NumPers": 2,
-              "Time":Timestamp.fromDate(DateTime(2020,2,24)),
-              "Title":"Farming",
-              "lvl":50,
-
-            });
-
-
-
-          });
-*/
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.amber[800],
@@ -108,13 +93,13 @@ class _HomeScreenState extends State<HomeScreen> {
             // backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.timelapse),
+            label: 'Reminders',
             // backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.people),
+            label: 'Friends',
             // backgroundColor: Colors.black,
           ),
         ],
@@ -153,7 +138,7 @@ class _HomeTabContentState extends State<HomeTabContent> {
               final post = feed[index];
 
               DocumentReference ref = post['ByUser'];
-              String idDoc = ref.path.substring(6);
+              String idDoc = ref.id;
               var refDoc = db.collection('users').doc('$idDoc').get();
 
               return Container(
@@ -168,11 +153,12 @@ class _HomeTabContentState extends State<HomeTabContent> {
                               // this vars should be fill with data from user collection
                               nickname: //CRASH HERE
                                   a['Nickname'],
-                                  userName: a['UserName'], // this vars should be fill with data from user collection
+                              userName: a[
+                                  'UserName'], // this vars should be fill with data from user collection
                               title: post['Title'],
                               description: post['Description'],
                               activity: post['Activity'],
-                             imagesPath: post['ActvityImages'],               
+                              imagesPath: post['ActvityImages'],
                               lvl: post['lvl'],
                               time: post['Time'],
                               peopleNum: post['NumPers']));
@@ -185,5 +171,51 @@ class _HomeTabContentState extends State<HomeTabContent> {
             },
           );
         });
+  }
+}
+
+class FriendsTabContent extends StatefulWidget {
+  @override
+  _FriendsTabContentState createState() => _FriendsTabContentState();
+}
+
+class _FriendsTabContentState extends State<FriendsTabContent> {
+  @override
+  Widget build(BuildContext context) {
+    // thisUser.id = "Il5ociGM5DEzofBhbdYB";
+    var thisUser = db.collection('users').doc('Il5ociGM5DEzofBhbdYB').get();
+    return FutureBuilder(
+      future: thisUser,
+      builder: (context, snap) {
+        if (snap.connectionState == ConnectionState.done) {
+          var aux = snap.data;
+          List friendsList = aux['Friends'];
+          return ListView.builder(
+            itemCount: friendsList.length,
+            itemBuilder: (context, index) {
+              DocumentReference ref = friendsList[index];
+
+              String idDoc = ref.id;
+              var refDoc = db.collection('users').doc('$idDoc').get();
+              return FutureBuilder(
+                  future: refDoc,
+                  builder: (context2, snap2) {
+                    if (snap2.connectionState == ConnectionState.done) {
+                      var data = snap2.data;
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(data['PicProfile']),
+                        ),
+                        title: Text(data['Nickname']),
+                      );
+                    } else
+                      return CircularProgressIndicator();
+                  });
+            },
+          );
+        } else
+          return CircularProgressIndicator();
+      },
+    );
   }
 }
