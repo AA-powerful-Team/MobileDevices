@@ -184,38 +184,48 @@ class _FriendsTabContentState extends State<FriendsTabContent> {
   Widget build(BuildContext context) {
     // thisUser.id = "Il5ociGM5DEzofBhbdYB";
     var thisUser = db.collection('users').doc('Il5ociGM5DEzofBhbdYB').get();
-    return FutureBuilder(
-      future: thisUser,
-      builder: (context, snap) {
-        if (snap.connectionState == ConnectionState.done) {
-          var aux = snap.data;
-          List friendsList = aux['Friends'];
-          return ListView.builder(
-            itemCount: friendsList.length,
-            itemBuilder: (context, index) {
-              DocumentReference ref = friendsList[index];
+    return Container(
+      color: Colors.white,
+          child: FutureBuilder(
+        future: thisUser,
+        builder: (context, snap) {
+          if (snap.connectionState == ConnectionState.done) {
+            var aux = snap.data;
+            List friendsList = aux['Friends'];
+            return ListView.builder(
+              itemCount: friendsList.length,
+              itemBuilder: (context, index) {
+                DocumentReference ref = friendsList[index];
 
-              String idDoc = ref.id;
-              var refDoc = db.collection('users').doc('$idDoc').get();
-              return FutureBuilder(
-                  future: refDoc,
-                  builder: (context2, snap2) {
-                    if (snap2.connectionState == ConnectionState.done) {
-                      var data = snap2.data;
-                      return ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(data['PicProfile']),
-                        ),
-                        title: Text(data['Nickname']),
-                      );
-                    } else
-                      return CircularProgressIndicator();
-                  });
-            },
-          );
-        } else
-          return CircularProgressIndicator();
-      },
+                String idDoc = ref.id;
+                var refDoc = db.collection('users').doc('$idDoc').get();
+                return FutureBuilder(
+                    future: refDoc,
+                    builder: (context2, snap2) {
+                      if (snap2.connectionState == ConnectionState.done) {
+                        var data = snap2.data;
+                        return ListTile(
+                          tileColor: Colors.grey[100],
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(data['PicProfile']),
+                          ),
+                          title: Text(data['Nickname']),
+                          trailing: IconButton(
+                            icon: Icon(Icons.filter_tilt_shift, color: Colors.grey,),
+                            onPressed: (){
+
+                            },
+                          ),
+                        );
+                      } else
+                        return CircularProgressIndicator();
+                    });
+              },
+            );
+          } else
+            return CircularProgressIndicator();
+        },
+      ),
     );
   }
 }
