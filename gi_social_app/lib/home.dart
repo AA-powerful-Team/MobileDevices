@@ -6,6 +6,8 @@ import 'Screens/SettingsScreen.dart';
 import 'Screens/EditProfile.dart';
 import 'Data/dataStructures.dart';
 
+import 'package:intl/intl.dart';
+
 final db = FirebaseFirestore.instance;
 UserData thisUser;
 
@@ -20,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -28,7 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final tabs = [
       HomeTabContent(),
-      editProfile(),
+      RemindersTabContent(),
+      //editProfile(),
       FriendsTabContent(),
     ];
 
@@ -184,9 +186,10 @@ class _FriendsTabContentState extends State<FriendsTabContent> {
   Widget build(BuildContext context) {
     // thisUser.id = "Il5ociGM5DEzofBhbdYB";
     var thisUser = db.collection('users').doc('Il5ociGM5DEzofBhbdYB').get();
+
     return Container(
       color: Colors.white,
-          child: FutureBuilder(
+      child: FutureBuilder(
         future: thisUser,
         builder: (context, snap) {
           if (snap.connectionState == ConnectionState.done) {
@@ -211,10 +214,11 @@ class _FriendsTabContentState extends State<FriendsTabContent> {
                           ),
                           title: Text(data['Nickname']),
                           trailing: IconButton(
-                            icon: Icon(Icons.filter_tilt_shift, color: Colors.grey,),
-                            onPressed: (){
-
-                            },
+                            icon: Icon(
+                              Icons.filter_tilt_shift,
+                              color: Colors.grey,
+                            ),
+                            onPressed: () {},
                           ),
                         );
                       } else
@@ -224,6 +228,68 @@ class _FriendsTabContentState extends State<FriendsTabContent> {
             );
           } else
             return CircularProgressIndicator();
+        },
+      ),
+    );
+  }
+}
+
+class RemindersTabContent extends StatefulWidget {
+  @override
+  _RemindersTabContentState createState() => _RemindersTabContentState();
+}
+
+class _RemindersTabContentState extends State<RemindersTabContent> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: StreamBuilder(
+        stream: db
+            .collection('users')
+            .doc('Il5ociGM5DEzofBhbdYB')
+            .collection('Reminders')
+            .snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snap) {
+          if (!snap.hasData) {
+            return Center(child: CircularProgressIndicator());
+          }
+          final remdata = snap.data.docs;
+
+          return ListView.builder(
+            itemCount: remdata.length,
+            itemBuilder: (context2, index) {
+              final rem = remdata[index];
+              DocumentReference ref = rem['RemByUser'];
+              String refID = ref.id;
+              return FutureBuilder(
+                future: db.collection('users').doc(refID).get(),
+                builder: (context, fut) {
+                  if (fut.connectionState == ConnectionState.done) {
+                    final uDataAux = fut.data;
+
+                    Timestamp date = rem['Date'];
+                    
+                    return ListTile(
+                      tileColor: Colors.grey[100],
+                      leading: Icon(
+                        Icons.notification_important,
+                        color: Colors.red,
+                      ),
+                      title: Text('You have an activity with:'),
+                      subtitle: Text(
+                        uDataAux['Nickname'],
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      trailing: Text(DateFormat('MM-dd  kk:mm')
+                          .format(DateTime.parse(date.toDate().toString())),style: TextStyle(color: Colors.black),),
+                    );
+                  } else
+                    return CircularProgressIndicator();
+                },
+              );
+            },
+          );
         },
       ),
     );
