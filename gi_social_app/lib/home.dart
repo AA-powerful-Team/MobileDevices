@@ -30,8 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final tabs = [
       HomeTabContent(),
       RemindersTabContent(),
-      //editProfile(),
       FriendsTabContent(),
+      ProfileInfo(),
     ];
 
     return Scaffold(
@@ -102,6 +102,11 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
             label: 'Friends',
+            // backgroundColor: Colors.black,
+          ),
+            BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
             // backgroundColor: Colors.black,
           ),
         ],
