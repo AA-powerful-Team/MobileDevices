@@ -12,12 +12,12 @@ class ProfileData {
       this.description = 'Description'});
 }
 
-class editProfile extends StatefulWidget {
+class EditProfile extends StatefulWidget {
   @override
-  _editProfileState createState() => _editProfileState();
+  _EditProfileState createState() => _EditProfileState();
 }
 
-class _editProfileState extends State<editProfile> {
+class _EditProfileState extends State<EditProfile> {
   TextEditingController controllerDescription;
   TextEditingController controllerUser;
   TextEditingController controllerEmail;
@@ -75,7 +75,7 @@ class _editProfileState extends State<editProfile> {
                           border: OutlineInputBorder(),
                         ),
                         onChanged: (String _) {
-                         // _descriptionUser = controllerUser.text;
+                          _descriptionUser = controllerUser.text;
                         },
                       ),
                     ),
@@ -100,7 +100,7 @@ class _editProfileState extends State<editProfile> {
                           border: OutlineInputBorder(),
                         ),
                         onChanged: (String _) {
-                          //_descriptionEmail = controllerEmail.text;
+                          _descriptionEmail = controllerEmail.text;
                         },
                       ),
                     ),
@@ -142,7 +142,7 @@ class _editProfileState extends State<editProfile> {
               ),
               maxLines: 8,
               onChanged: (String _) {
-               // _descriptionText = controllerDescription.text;
+                _descriptionText = controllerDescription.text;
               },
             ),
             SizedBox(
@@ -317,7 +317,7 @@ class _ProfileInfo extends State<ProfileInfo> {
               color: Colors.orange,
               onPressed: () {
                 Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => editProfile()))
+                        MaterialPageRoute(builder: (context) => EditProfile()))
                     .then((value) {
                   if (value != null) {
                     setState(() {
