@@ -26,7 +26,7 @@ class _EditProfileState extends State<EditProfile> {
   String _descriptionUser;
   String _descriptionEmail;
 
-  ProfileData editProfData;
+  ProfileData editProfData = new ProfileData();
 
   @override
   void initState() {
@@ -165,11 +165,10 @@ class _EditProfileState extends State<EditProfile> {
                 RaisedButton(
                   child: Text('Saved'),
                   onPressed: () {
-                    setState(() {
-                      editProfData.description = _descriptionText;
-                      editProfData.adress = _descriptionEmail;
-                      editProfData.name = _descriptionUser;
-                    });
+                    editProfData.name = _descriptionUser;
+                    editProfData.adress = _descriptionEmail;
+                    editProfData.description = _descriptionText;
+                    
                     Navigator.of(context).pop(editProfData);
                   },
                 ),
