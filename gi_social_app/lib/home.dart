@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gi_social_app/Screens/CreatePost.dart';
@@ -73,6 +75,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         builder: (BuildContext context) => SettingsScreen()));
               },
             ),
+            new ListTile(
+              title: Text('Debug:create user'),
+              onTap: () {
+                var rand = new Random();
+                int random = rand.nextInt(100);
+                String aux = 'user$random';
+                db.collection('users').add({
+                  "Nickname": aux,
+                  "PicProfile":
+                      'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+                  "Username": '@$aux',
+                });
+              },
+            )
           ],
         ),
       ),
@@ -104,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Friends',
             // backgroundColor: Colors.black,
           ),
-            BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
             // backgroundColor: Colors.black,
@@ -193,48 +209,113 @@ class _FriendsTabContentState extends State<FriendsTabContent> {
     var thisUser = db.collection('users').doc('Il5ociGM5DEzofBhbdYB').get();
 
     return Container(
-      color: Colors.white,
-      child: FutureBuilder(
-        future: thisUser,
-        builder: (context, snap) {
-          if (snap.connectionState == ConnectionState.done) {
-            var aux = snap.data;
-            List friendsList = aux['Friends'];
-            return ListView.builder(
-              itemCount: friendsList.length,
-              itemBuilder: (context, index) {
-                DocumentReference ref = friendsList[index];
+      child: Column(
+        children: [
+          Expanded(
+            child: Container(
+              color: Colors.white,
+              child: FutureBuilder(
+                future: thisUser,
+                builder: (context, snap) {
+                  if (snap.connectionState == ConnectionState.done) {
+                    var aux = snap.data;
+                    List friendsList = aux['Friends'];
+                    return ListView.builder(
+                      itemCount: friendsList.length,
+                      itemBuilder: (context, index) {
+                        DocumentReference ref = friendsList[index];
 
-                String idDoc = ref.id;
-                var refDoc = db.collection('users').doc('$idDoc').get();
-                return FutureBuilder(
-                    future: refDoc,
-                    builder: (context2, snap2) {
-                      if (snap2.connectionState == ConnectionState.done) {
-                        var data = snap2.data;
-                        return ListTile(
-                          tileColor: Colors.grey[100],
-                          leading: CircleAvatar(
-                            backgroundImage: NetworkImage(data['PicProfile']),
-                          ),
-                          title: Text(data['Nickname']),
-                          trailing: IconButton(
-                            icon: Icon(
-                              Icons.filter_tilt_shift,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {},
-                          ),
-                        );
-                      } else
-                        return CircularProgressIndicator();
-                    });
-              },
-            );
-          } else
-            return CircularProgressIndicator();
+                        String idDoc = ref.id;
+                        var refDoc = db.collection('users').doc('$idDoc').get();
+                        return FutureBuilder(
+                            future: refDoc,
+                            builder: (context2, snap2) {
+                              if (snap2.connectionState ==
+                                  ConnectionState.done) {
+                                var data = snap2.data;
+                                return ListTile(
+                                  tileColor: Colors.grey[100],
+                                  leading: CircleAvatar(
+                                    backgroundImage:
+                                        NetworkImage(data['PicProfile']),
+                                  ),
+                                  title: Text(data['Nickname']),
+                                  trailing: IconButton(
+                                    icon: Icon(
+                                      Icons.filter_tilt_shift,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                );
+                              } else
+                                return CircularProgressIndicator();
+                            });
+                      },
+                    );
+                  } else
+                    return CircularProgressIndicator();
+                },
+              ),
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => FriendListSearch()));
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FriendListSearch extends StatefulWidget {
+  @override
+  _FriendListSearchState createState() => _FriendListSearchState();
+}
+
+class _FriendListSearchState extends State<FriendListSearch> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+          body: Container(
+            color: Colors.white,
+            child: StreamBuilder(
+        stream: db.collection('users').snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (!snapshot.hasData) {
+              return Center(child: CircularProgressIndicator());
+            } else {
+              var aux = snapshot.data.docs;
+              return ListView.builder(
+                  itemCount: aux.length,
+                  itemBuilder: (context, index) {
+                    final userData = aux[index];
+
+                    return ListTile(
+                      title: Text(userData['Nickname']),
+                      trailing: IconButton(
+                        icon: Icon(
+                          Icons.filter_tilt_shift,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {
+                          
+
+                        },
+                      ),
+                    );
+                  });
+            }
         },
       ),
+          ),
     );
   }
 }
@@ -274,7 +355,7 @@ class _RemindersTabContentState extends State<RemindersTabContent> {
                     final uDataAux = fut.data;
 
                     Timestamp date = rem['Date'];
-                    
+
                     return ListTile(
                       tileColor: Colors.grey[100],
                       leading: Icon(
@@ -286,8 +367,11 @@ class _RemindersTabContentState extends State<RemindersTabContent> {
                         uDataAux['Nickname'],
                         style: TextStyle(color: Colors.blue),
                       ),
-                      trailing: Text(DateFormat('MM-dd  kk:mm')
-                          .format(DateTime.parse(date.toDate().toString())),style: TextStyle(color: Colors.black),),
+                      trailing: Text(
+                        DateFormat('MM-dd  kk:mm')
+                            .format(DateTime.parse(date.toDate().toString())),
+                        style: TextStyle(color: Colors.black),
+                      ),
                     );
                   } else
                     return CircularProgressIndicator();

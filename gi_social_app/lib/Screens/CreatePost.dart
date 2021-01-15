@@ -72,7 +72,8 @@ class _CreatePostState extends State<CreatePost> {
                 ),
                 maxLines: 1,
                 controller: _controllerTitle,
-                onChanged: (String _) {//Note: i think on submitted would be more optimal but then if the button is not pressed value = null
+                onChanged: (String _) {
+                  //Note: i think on submitted would be more optimal but then if the button is not pressed value = null
                   setState(() {
                     _titleText = _controllerTitle.text;
                   });
@@ -200,7 +201,7 @@ class _CreatePostState extends State<CreatePost> {
                 ),
                 maxLength: 5,
                 controller: _controllerTime,
-               onChanged: (String _) {
+                onChanged: (String _) {
                   setState(() {
                     time = _controllerTime.text;
                   });
@@ -223,7 +224,7 @@ class _CreatePostState extends State<CreatePost> {
                     aux[2].imagePath,
                     aux[3].imagePath,
                   ];
-                  setState(() {         
+                  setState(() {
                     db.collection('feed').add({
                       "Activity": _titleText,
                       "ByUser":
@@ -236,6 +237,16 @@ class _CreatePostState extends State<CreatePost> {
                       "lvl": auxLvl,
                       "ActvityImages": images,
                     });
+                    DocumentReference aux=db.collection('users').doc('Il5ociGM5DEzofBhbdYB');
+                    db
+                        .collection('users')
+                        .doc('Il5ociGM5DEzofBhbdYB')
+                        .collection('Reminders')
+                        .add({
+                      "Date": Timestamp.now(),
+                      "RemByUser":aux,
+                    });
+
                     Navigator.of(context).pop();
                   });
                 },
