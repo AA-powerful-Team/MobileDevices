@@ -12,6 +12,8 @@ import 'package:intl/intl.dart';
 
 final db = FirebaseFirestore.instance;
 UserData thisUser;
+enum PopmenuEnum { AddFriend, Block }
+List friendsListGlobal = new List();
 
 class HomeScreen extends StatefulWidget {
   // This widget is the root of your application.
@@ -177,7 +179,7 @@ class _HomeTabContentState extends State<HomeTabContent> {
                               nickname: //CRASH HERE
                                   a['Nickname'],
                               userName: a[
-                                  'UserName'], // this vars should be fill with data from user collection
+                                  'Username'], // this vars should be fill with data from user collection
                               title: post['Title'],
                               description: post['Description'],
                               activity: post['Activity'],
@@ -226,31 +228,34 @@ class _FriendsTabContentState extends State<FriendsTabContent> {
                         DocumentReference ref = friendsList[index];
 
                         String idDoc = ref.id;
-                        var refDoc = db.collection('users').doc('$idDoc').get();
-                        return FutureBuilder(
-                            future: refDoc,
-                            builder: (context2, snap2) {
-                              if (snap2.connectionState ==
-                                  ConnectionState.done) {
-                                var data = snap2.data;
-                                return ListTile(
-                                  tileColor: Colors.grey[100],
-                                  leading: CircleAvatar(
-                                    backgroundImage:
-                                        NetworkImage(data['PicProfile']),
-                                  ),
-                                  title: Text(data['Nickname']),
-                                  trailing: IconButton(
-                                    icon: Icon(
-                                      Icons.filter_tilt_shift,
-                                      color: Colors.grey,
+                        if (idDoc != 'Il5ociGM5DEzofBhbdYB') {
+                          var refDoc =
+                              db.collection('users').doc('$idDoc').get();
+                          return FutureBuilder(
+                              future: refDoc,
+                              builder: (context2, snap2) {
+                                if (snap2.connectionState ==
+                                    ConnectionState.done) {
+                                  var data = snap2.data;
+                                  return ListTile(
+                                    tileColor: Colors.grey[100],
+                                    leading: CircleAvatar(
+                                      backgroundImage:
+                                          NetworkImage(data['PicProfile']),
                                     ),
-                                    onPressed: () {},
-                                  ),
-                                );
-                              } else
-                                return CircularProgressIndicator();
-                            });
+                                    title: Text(data['Nickname']),
+                                    trailing: IconButton(
+                                      icon: Icon(
+                                        Icons.filter_tilt_shift,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                  );
+                                } else
+                                  return CircularProgressIndicator();
+                              });
+                        }
                       },
                     );
                   } else
@@ -265,7 +270,10 @@ class _FriendsTabContentState extends State<FriendsTabContent> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => FriendListSearch()));
+                      builder: (BuildContext context) =>
+                          FriendListSearch())).then((value) {
+                setState(() {});
+              });
             },
           ),
         ],
@@ -280,15 +288,17 @@ class FriendListSearch extends StatefulWidget {
 }
 
 class _FriendListSearchState extends State<FriendListSearch> {
+  PopmenuEnum _selected;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-          body: Container(
-            color: Colors.white,
-            child: StreamBuilder(
-        stream: db.collection('users').snapshots(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+      body: Container(
+        color: Colors.white,
+        child: StreamBuilder(
+          stream: db.collection('users').snapshots(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
               return Center(child: CircularProgressIndicator());
             } else {
@@ -300,22 +310,44 @@ class _FriendListSearchState extends State<FriendListSearch> {
 
                     return ListTile(
                       title: Text(userData['Nickname']),
-                      trailing: IconButton(
+                      trailing: PopupMenuButton<PopmenuEnum>(
                         icon: Icon(
                           Icons.filter_tilt_shift,
                           color: Colors.grey,
                         ),
-                        onPressed: () {
-                          
+                        onSelected: (PopmenuEnum result) {
+                          setState(() {
+                            _selected = result;
 
+                            if (_selected == PopmenuEnum.AddFriend) {
+                                friendsListGlobal.add(userData.reference);
+                                db
+                                    .collection('users')
+                                    .doc('Il5ociGM5DEzofBhbdYB')
+                                    .update({
+                                  "Friends": friendsListGlobal,
+                                });
+                              
+                            }
+                          });
                         },
+                        itemBuilder: (context) => <PopupMenuEntry<PopmenuEnum>>[
+                          const PopupMenuItem<PopmenuEnum>(
+                            value: PopmenuEnum.AddFriend,
+                            child: Text('Add as friend'),
+                          ),
+                          const PopupMenuItem<PopmenuEnum>(
+                            value: PopmenuEnum.Block,
+                            child: Text('Block user'),
+                          )
+                        ],
                       ),
                     );
                   });
             }
-        },
+          },
+        ),
       ),
-          ),
     );
   }
 }
